@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:form_robo/screens/widgets/loading_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 class FlyScreen extends StatefulWidget {
@@ -169,13 +170,13 @@ class _FlyScreenState extends State<FlyScreen> {
                 myLocationButtonEnabled: true,
 
                 compassEnabled: true,
-                markers: {
-                  Marker(
-                      markerId: MarkerId("1"),
-                      position: initialLocation,
-                      icon:markerbitmap
-                  )
-                },
+                // markers: {
+                //   Marker(
+                //       markerId: MarkerId("1"),
+                //       position: initialLocation,
+                //       icon:markerbitmap
+                //   )
+                // },
                 polygons: {
                   Polygon(
                       polygonId: PolygonId("1"),
@@ -183,7 +184,7 @@ class _FlyScreenState extends State<FlyScreen> {
                       fillColor: Color(0xFF006491).withOpacity(0.2),
                       strokeWidth: 2
                   ),
-                }
+               }
             ),
 
             // GoogleMap(
@@ -420,69 +421,70 @@ class _FlyScreenState extends State<FlyScreen> {
                         children: [
                           Column(
                             children: [
-                              Text("Max. Speed",style: ThemeConfig.minimumStyleGrey,),
+                              Text("Altitude",style: ThemeConfig.minimumStyleGrey,),
                               SizedBox(height: 4,),
-                              Text("80 km/hr",style: ThemeConfig.primary14,)
+                              Text("4.3 km/hr",style: ThemeConfig.primary14,)
                             ],
                           ),
                           ThemeConfig.divider,
                           Column(
                             children: [
-                              Text("Fuel Consumption",style: ThemeConfig.minimumStyleGrey,),
+                              Text("Drone Speed",style: ThemeConfig.minimumStyleGrey,),
                               SizedBox(height: 4,),
-                              Text("2.2 L/km",style: ThemeConfig.primary14,)
+                              Text("40 km/hr",style: ThemeConfig.primary14,)
                             ],
                           ),
                           ThemeConfig.divider,
                           Column(
                             children: [
-                              Text("Fuel Left",style: ThemeConfig.minimumStyleGrey,),
+                              Text("Distance",style: ThemeConfig.minimumStyleGrey,),
                               SizedBox(height: 4,),
-                              Text("30 %",style: ThemeConfig.primary14,)
+                              Text("280 M",style: ThemeConfig.primary14,)
                             ],
                           ),
                           ThemeConfig.divider,
                           Column(
                             children: [
-                              Text("Range",style: ThemeConfig.minimumStyleGrey,),
+                              Text("Fuel Level",style: ThemeConfig.minimumStyleGrey,),
                               SizedBox(height: 4,),
-                              Text("200M",style: ThemeConfig.primary14,)
+                              Text("50 %",style: ThemeConfig.primary14,)
                             ],
                           ),
                           ThemeConfig.divider,
                           Column(
                             children: [
-                              Text("Battery Status",style: ThemeConfig.minimumStyleGrey,),
+                              Text("Fertilizer Level",style: ThemeConfig.minimumStyleGrey,),
                               SizedBox(height: 4,),
                               Text("80 %",style: ThemeConfig.primary14,)
                             ],
                           ),
 
+
                         ],
                       ),
                     ),
-                    InkWell(
-                      onTap: (){
-                        _sortbyForm();
-                       // startTimer();
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        alignment: Alignment.center,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            color: ThemeConfig.redColor
-                        ),
-                        child: Text("Emergency Landing",style: ThemeConfig.textStyleWhite14,),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: (){
+                    //     _sortbyForm();
+                    //    // startTimer();
+                    //     //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                    //   },
+                    //   child: Container(
+                    //     padding: EdgeInsets.symmetric(horizontal: 20),
+                    //     alignment: Alignment.center,
+                    //     height: 40,
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(6),
+                    //         color: ThemeConfig.redColor
+                    //     ),
+                    //     child: Text("Emergency Landing",style: ThemeConfig.textStyleWhite14,),
+                    //   ),
+                    // ),
 
                     InkWell(
                       onTap: (){
                         startTimer();
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoadingScreen()));
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 40),
@@ -492,7 +494,7 @@ class _FlyScreenState extends State<FlyScreen> {
                             borderRadius: BorderRadius.circular(6),
                             color: ThemeConfig.primary
                         ),
-                        child: Text("START",style: ThemeConfig.textStylewhite16,),
+                        child: Text("Connect",style: ThemeConfig.textStylewhite16,),
                       ),
                     )
                   ],
@@ -552,9 +554,6 @@ class _FlyScreenState extends State<FlyScreen> {
   }
 }
 
-
-
-
 class SignalParametersCard extends StatelessWidget {
   const SignalParametersCard({Key? key}) : super(key: key);
 
@@ -563,80 +562,94 @@ class SignalParametersCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-
-            InkWell(
-              onTap: (){
-                NavigationService().pop();
-              },
-              child: Row(
-                children: [
-                  Icon(Icons.arrow_back,size: 24,),
-                  SizedBox(width: 4,),
-                  Text("Back")
-                ],
-              ),
-            ),
-            SizedBox(width: 14,),
-
-            Row(
-              children: [
-                Icon(Icons.arrow_upward,size: 24,),
-                Text("V.S",style: ThemeConfig.minimumStyleGrey,),
-                SizedBox(width: 4,),
-                Text("1.5 MS/S",style: ThemeConfig.primary14,)
-              ],
-            ),
-            SizedBox(width: 6,),
-            Container(
-              height: 30,
-              width: 2,
-              color: Colors.grey.shade300,
-            ),
-            SizedBox(width: 6,),
-            Row(
-              children: [
-                Icon(Icons.arrow_back,size: 24,),
-                Text("H.S",style: ThemeConfig.minimumStyleGrey,),
-                SizedBox(width: 4,),
-                Text("2.2 M/Sec",style: ThemeConfig.primary14,)
-              ],
-            ),
-            SizedBox(width: 6,),
-            Container(
-              height: 30,
-              width: 2,
-              color: Colors.grey.shade300,
-            ),
-            SizedBox(width: 6,),
-            Row(
-              children: [
-                Text("D",style: ThemeConfig.minimumStyleGrey,),
-                SizedBox(width: 4,),
-                Text("928 ft",style: ThemeConfig.primary14,)
-              ],
-            ),
-            SizedBox(width: 6,),
-            Container(
-              height: 30,
-              width: 2,
-              color: Colors.grey.shade300,
-            ),
-            SizedBox(width: 6,),
-            Row(
-              children: [
-                Text("H",style: ThemeConfig.minimumStyleGrey,),
-                SizedBox(width: 4,),
-                Text("200 ft",style: ThemeConfig.primary14,)
-              ],
-            ),
-
-
-
-          ],
+        InkWell(
+          onTap: (){
+            NavigationService().pop();
+          },
+          child: Row(
+            children: [
+              Icon(Icons.arrow_back,size: 24,),
+              SizedBox(width: 4,),
+              Text("Back")
+            ],
+          ),
         ),
+
+
+        // Row(
+        //  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //
+        //     InkWell(
+        //       onTap: (){
+        //         NavigationService().pop();
+        //       },
+        //       child: Row(
+        //         children: [
+        //           Icon(Icons.arrow_back,size: 24,),
+        //           SizedBox(width: 4,),
+        //           Text("Back")
+        //         ],
+        //       ),
+        //     ),
+        //     SizedBox(width: 14,),
+        //
+        //     Row(
+        //       children: [
+        //         Icon(Icons.arrow_upward,size: 24,),
+        //         Text("V.S",style: ThemeConfig.minimumStyleGrey,),
+        //         SizedBox(width: 4,),
+        //         Text("1.5 MS/S",style: ThemeConfig.primary14,)
+        //       ],
+        //     ),
+        //     SizedBox(width: 6,),
+        //     Container(
+        //       height: 30,
+        //       width: 2,
+        //       color: Colors.grey.shade300,
+        //     ),
+        //     SizedBox(width: 6,),
+        //     Row(
+        //       children: [
+        //         Icon(Icons.arrow_back,size: 24,),
+        //         Text("H.S",style: ThemeConfig.minimumStyleGrey,),
+        //         SizedBox(width: 4,),
+        //         Text("2.2 M/Sec",style: ThemeConfig.primary14,)
+        //       ],
+        //     ),
+        //     SizedBox(width: 6,),
+        //     Container(
+        //       height: 30,
+        //       width: 2,
+        //       color: Colors.grey.shade300,
+        //     ),
+        //     SizedBox(width: 6,),
+        //     Row(
+        //       children: [
+        //         Text("D",style: ThemeConfig.minimumStyleGrey,),
+        //         SizedBox(width: 4,),
+        //         Text("928 ft",style: ThemeConfig.primary14,)
+        //       ],
+        //     ),
+        //     SizedBox(width: 6,),
+        //     Container(
+        //       height: 30,
+        //       width: 2,
+        //       color: Colors.grey.shade300,
+        //     ),
+        //     SizedBox(width: 6,),
+        //     Row(
+        //       children: [
+        //         Text("H",style: ThemeConfig.minimumStyleGrey,),
+        //         SizedBox(width: 4,),
+        //         Text("200 ft",style: ThemeConfig.primary14,)
+        //       ],
+        //     ),
+        //
+        //
+        //
+        //   ],
+        // ),
 
         Row(
           children: [
@@ -644,59 +657,59 @@ class SignalParametersCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Device Signal",style: ThemeConfig.minimumStyleGrey12,),
+                Text("Transmitter Signal",style: ThemeConfig.minimumStyleGrey12,),
                 SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.robot,color: Colors.grey,size: 16,),
+                    Icon(FontAwesomeIcons.robot,color: Theme.of(context).primaryColor,size: 16,),
                     SizedBox(width: 10,),
-                    Icon(FontAwesomeIcons.signal,color: Colors.grey,size: 12,),
+                    Icon(FontAwesomeIcons.signal,color: Theme.of(context).primaryColor,size: 12,),
 
                   ],
                 )
               ],
             ),
-            SizedBox(width: 6,),
+            SizedBox(width: 8,),
             Container(
               height: 30,
               width: 2,
               color: Colors.grey.shade300,
             ),
-            SizedBox(width: 6,),
+            SizedBox(width: 8,),
 
 
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Drone Signal",style: ThemeConfig.minimumStyleGrey12,),
+                Text("Telemetry Signal",style: ThemeConfig.minimumStyleGrey12,),
                 SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.dragon,color: Colors.grey,size: 16,),
+                    Icon(FontAwesomeIcons.dragon,color: Theme.of(context).primaryColor,size: 16,),
                     SizedBox(width: 10,),
-                    Icon(FontAwesomeIcons.signal,color: Colors.grey,size: 12,),
+                    Icon(FontAwesomeIcons.signal,color: Theme.of(context).primaryColor,size: 12,),
 
                   ],
                 )
               ],
             ),
 
-            SizedBox(width: 6,),
+            SizedBox(width: 8,),
             Container(
               height: 30,
               width: 2,
               color: Colors.grey.shade300,
             ),
-            SizedBox(width: 6,),
+            SizedBox(width: 8,),
 
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Battery",style: ThemeConfig.minimumStyleGrey12,),
+                Text("Transmitter Battery",style: ThemeConfig.minimumStyleGrey12,),
                 SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.batteryHalf,color: Colors.grey,size: 14,),
+                    Icon(FontAwesomeIcons.batteryHalf,color: Theme.of(context).primaryColor,size: 14,),
                     SizedBox(width: 10,),
                     Text("89 %",style: ThemeConfig.Medium14grey,)
                   ],
@@ -704,13 +717,13 @@ class SignalParametersCard extends StatelessWidget {
               ],
             ),
 
-            SizedBox(width: 6,),
+            SizedBox(width: 8,),
             Container(
               height: 30,
               width: 2,
               color: Colors.grey.shade300,
             ),
-            SizedBox(width: 6,),
+            SizedBox(width: 8,),
 
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -727,16 +740,16 @@ class SignalParametersCard extends StatelessWidget {
               ],
             ),
 
-            SizedBox(width: 6,),
+            SizedBox(width: 8,),
             Container(
               height: 30,
               width: 2,
               color: Colors.grey.shade300,
             ),
-            SizedBox(width: 6,),
+            SizedBox(width: 8,),
 
 
-            Icon(Icons.settings,color: ThemeConfig.lightGreyColor,size: 20,)
+            Icon(Icons.settings,color: Theme.of(context).primaryColor,size: 20,)
 
 
           ],

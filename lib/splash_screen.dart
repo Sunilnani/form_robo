@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:form_robo/components/navigation_service.dart';
-import 'package:form_robo/screens/home_page.dart';
-import 'package:form_robo/screens/login_screen.dart';
+import 'package:form_robo/screens/dashBoard_screens/home_page.dart';
+import 'package:form_robo/screens/authentication_screens/login_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void splash(){
     Future.delayed(Duration(seconds: 2),(){
-      NavigationService().navigatePage(HomePage());
+      NavigationService().navigatePage(LoginPage());
     });
   }
 

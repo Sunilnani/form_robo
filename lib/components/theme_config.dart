@@ -329,6 +329,8 @@ class ThemeConfig {
   static TextStyle primary12= TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: ThemeConfig.primary);
   static TextStyle primary14= TextStyle(fontSize: 14,fontWeight: FontWeight.w600,color: ThemeConfig.primary);
   static TextStyle primary16= TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: ThemeConfig.primary);
+  static TextStyle primary20= TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: ThemeConfig.primary);
+
 
 
 

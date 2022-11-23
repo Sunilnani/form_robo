@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_robo/components/app_custom_card.dart';
+import 'package:form_robo/components/app_drop_down_search.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/text_form_fields.dart';
 import 'package:form_robo/components/theme_config.dart';
-import 'package:form_robo/screens/add_map_screen.dart';
+import 'package:form_robo/screens/land_profile_screens/add_map_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:perfect_volume_control/perfect_volume_control.dart';
 class AddLandProfile extends StatefulWidget {
@@ -37,15 +38,23 @@ class _AddLandProfileState extends State<AddLandProfile> {
   // bool isSelected = false;
 
 
-  List<String> sprayingSpeed=["Low","medium","Speed"];
+  List<String> sprayingSpeed=["Auto","Manual"];
+
 
   String? selected_map;
 
   int _selectedmapIndex = 0;
 
 
+  List<String> _speedType=["Low","High"];
+  int _selectedSpeedIndex = 0;
 
-  List<String> mapType=["Manual","Automatic",];
+
+  String? _selectedSpeed;
+
+
+
+  List<String> mapType=["Raoming","Standard",];
 
 
 
@@ -76,6 +85,11 @@ class _AddLandProfileState extends State<AddLandProfile> {
     super.initState();
   }
 
+
+  List<String> _cropTypeList = ["Wheat", "Mirchi","Tomattoo","+ Add New crop"];
+  String? _cropType;
+
+  final bool? _isSprayingSpeedManual = false;
 
   @override
   Widget build(BuildContext context) {
@@ -160,112 +174,129 @@ class _AddLandProfileState extends State<AddLandProfile> {
                             SizedBox(width: 20,),
 
                             Container(
-                              padding: EdgeInsets.only(left: 14, right: 14),
-                              height: 40,
+                              height: 80,
                               width: MediaQuery.of(context).size.width*0.5,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(4),
-                                  color:  ThemeConfig.whiteColor,
-                                  border: Border.all(color:  ThemeConfig.bgGreyColor)
-                              ),
-                              child:TextField(
-                                // controller: streetController,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                // controller: numberController,
-                                cursorColor:  ThemeConfig.primary,
-                                inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.singleLineFormatter,
-                                  LengthLimitingTextInputFormatter(15)
-                                ],
-                                decoration: InputDecoration(
-                                  //hintText: "Search here",
-                                    hintStyle: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.grey[500]),
-                                    border: InputBorder.none),
-                              ),
+                              child: AppDropDownSearch<String>(
+                                focusColor: ThemeConfig.secondaryColor.withOpacity(0.5),
+                               // title: "District",
+                                hintText: "Select  Crop Type",
+                                borderColor: ThemeConfig.formBorderColor,
+                                enabled: false,
+                                selectedItem: _cropType,
+                                suffixIcon: Icons.keyboard_arrow_down_rounded,
+                                color: ThemeConfig.lightBlackColor,
+                                fillColor: ThemeConfig.whiteColor,
 
+                                itemAsString: (String? quantityType) => quantityType??"",
+                                asyncItems:(String? filter)  async => _cropTypeList,
+                                onChanged: (String? quantityType) {
+                                  _cropType = quantityType;
+                                  print(quantityType);
+                                },
+                              ),
                             ),
+
+
+
+
+                            // Container(
+                            //   padding: EdgeInsets.only(left: 14, right: 14),
+                            //   height: 40,
+                            //   width: MediaQuery.of(context).size.width*0.5,
+                            //   decoration: BoxDecoration(
+                            //       shape: BoxShape.rectangle,
+                            //       borderRadius: BorderRadius.circular(4),
+                            //       color:  ThemeConfig.whiteColor,
+                            //       border: Border.all(color:  ThemeConfig.bgGreyColor)
+                            //   ),
+                            //   child:TextField(
+                            //     // controller: streetController,
+                            //     style: TextStyle(
+                            //       fontSize: 18,
+                            //       fontWeight: FontWeight.w600,
+                            //     ),
+                            //     // controller: numberController,
+                            //     cursorColor:  ThemeConfig.primary,
+                            //     inputFormatters: <TextInputFormatter>[
+                            //       FilteringTextInputFormatter.singleLineFormatter,
+                            //       LengthLimitingTextInputFormatter(15)
+                            //     ],
+                            //     decoration: InputDecoration(
+                            //       //hintText: "Search here",
+                            //         hintStyle: TextStyle(
+                            //             fontSize: 14,
+                            //             fontWeight: FontWeight.w500,
+                            //             color: Colors.grey[500]),
+                            //         border: InputBorder.none),
+                            //   ),
+                            //
+                            // ),
                           ],
                         ),
 
 
-                        SizedBox(height: 20,),
+
 
                        Row(
                          children: [
-                           Text("Flying Height     ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
+                           Text("Crop Height  ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
                            SizedBox(width: 20,),
 
 
-                           Slider(
-                             value: _currentSliderValue,
-                             max: 100,
-                             divisions: 5,
-                             label: _currentSliderValue.round().toString(),
-                             onChanged: (double value) {
-                               setState(() {
-                                 _currentSliderValue = value;
-                               });
-                             },
+                           Container(
+                             padding: EdgeInsets.only(left: 14, right: 14),
+                             height: 40,
+                             width: MediaQuery.of(context).size.width*0.5,
+                             decoration: BoxDecoration(
+                                 shape: BoxShape.rectangle,
+                                 borderRadius: BorderRadius.circular(4),
+                                 color:  ThemeConfig.whiteColor,
+                                 border: Border.all(color:  ThemeConfig.bgGreyColor)
+                             ),
+                             child:TextField(
+                               // controller: streetController,
+                               style: TextStyle(
+                                 fontSize: 18,
+                                 fontWeight: FontWeight.w600,
+                               ),
+                               // controller: numberController,
+                               cursorColor:  ThemeConfig.primary,
+                               inputFormatters: <TextInputFormatter>[
+                                 FilteringTextInputFormatter.singleLineFormatter,
+                                 LengthLimitingTextInputFormatter(15)
+                               ],
+                               decoration: InputDecoration(
+                                 //hintText: "Search here",
+                                   hintStyle: TextStyle(
+                                       fontSize: 14,
+                                       fontWeight: FontWeight.w500,
+                                       color: Colors.grey[500]),
+                                   border: InputBorder.none),
+                             ),
+
                            ),
 
 
-                           SizedBox(width: 20,),
-                           Text("$_currentSliderValue"),
+                           // Slider(
+                           //   value: _currentSliderValue,
+                           //   max: 100,
+                           //   divisions: 5,
+                           //   label: _currentSliderValue.round().toString(),
+                           //   onChanged: (double value) {
+                           //     setState(() {
+                           //       _currentSliderValue = value;
+                           //     });
+                           //   },
+                           // ),
+                           //
+                           //
+                           // SizedBox(width: 20,),
+                           // Text("$_currentSliderValue"),
 
 
                          ],
                        ),
 
-
-                        SizedBox(height: 20,),
-
-                        Row(
-                          children: [
-                            Text("Moving Speed     ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
-                            SizedBox(width: 20,),
-
-
-                            // Slider(
-                            //
-                            //   value: currentvol,
-                            //   onChanged: (newvol){
-                            //     currentvol = newvol;
-                            //     PerfectVolumeControl.setVolume(newvol); //set new volume
-                            //     setState(() {
-                            //
-                            //     });
-                            //   },
-                            //   min: 0, //
-                            //   max:  1,
-                            //   divisions: 100,
-                            // ),
-
-                            Slider(
-                              value: _currentSliderValue,
-                              max: 100,
-                              divisions: 5,
-                              label: _currentSliderValue.round().toString(),
-                              onChanged: (double value) {
-                                setState(() {
-                                  _currentSliderValue = value;
-                                });
-                              },
-                            ),
-
-
-                            SizedBox(width: 20,),
-                            Text("$_currentSliderValue"),
-
-
-                          ],
-                        ),
 
                         SizedBox(height: 20,),
 
@@ -310,7 +341,7 @@ class _AddLandProfileState extends State<AddLandProfile> {
                                           height: 40,
                                           width: 100,
                                           child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                                        )
+                                        ),
                                       ],
                                     ),
 
@@ -326,6 +357,70 @@ class _AddLandProfileState extends State<AddLandProfile> {
 
                           ],
                         ),
+
+                        SizedBox(height: 20,),
+
+                        _selectedIndex == 1 ?
+
+                        Row(
+                          children: [
+
+                            Text("Speed Type            ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
+                            SizedBox(width: 20,),
+
+
+                            Container(
+                              height: MediaQuery.of(context).size.height*0.1,
+                              width: MediaQuery.of(context).size.width*0.45,
+                              child: ListView.separated(
+                                //shrinkWrap: true,
+                                itemCount: _speedType.length,
+                                physics: BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+
+                                  // orderId = notifications!.orders![index].id;
+
+                                  return InkWell(
+                                    onTap: (){
+
+                                      setState(() {
+                                        // isSelected = !isSelected;
+                                        _selectedSpeedIndex = index;
+                                        _selectedSpeed=_speedType[index];
+                                        print("---------------------------> index ${_selectedSpeedIndex}");
+
+                                      });
+
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                                            context,
+                                            radius: 4,
+                                            color: _selectedSpeedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                                          height: 40,
+                                          width: 100,
+                                          child: Text("${_speedType[index]}",style: _selectedSpeedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                                        ),
+                                      ],
+                                    ),
+
+                                  );
+                                },
+                                separatorBuilder: (BuildContext context, int index) {
+                                  return const SizedBox(height: 0);
+                                },
+                              ),
+                            ),
+
+
+
+                          ],
+                        ):SizedBox()
+                        ,
 
                         SizedBox(height: 20,),
 

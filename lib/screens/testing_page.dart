@@ -225,6 +225,13 @@ int id =1;
     setState(() {
       //refresh UI
       latLen.add(LatLng(position!.latitude, position!.longitude));
+      _polyline.add(
+          Polyline(
+            polylineId: PolylineId('1'),
+            points: latLen,
+            color: Colors.green,
+          )
+      );
 
       print("added latlan are -------------------------------------------------------------->${latLen}");
     });
@@ -342,7 +349,7 @@ void initState() {
         iconTheme: IconThemeData(color: ThemeConfig.primary),
         title: Expanded(
           child: Text(
-            "Add Map",
+            "Add Maps",
             overflow: TextOverflow.visible,
             softWrap: true,
             style: Theme.of(context).textTheme.headline5!.copyWith(
@@ -384,14 +391,14 @@ void initState() {
 
           // polylines: _polyline,
 
-          // polygons: {
-          //   Polygon(
-          //       polygonId: PolygonId("1"),
-          //       points: latLen,
-          //       fillColor: Color(0xFF006491).withOpacity(0.2),
-          //       strokeWidth: 2
-          //   ),
-          // },
+          polygons: {
+            Polygon(
+                polygonId: PolygonId("1"),
+                points: latLan,
+                fillColor: Color(0xFF006491).withOpacity(0.2),
+                strokeWidth: 2
+            ),
+          },
 
           onMapCreated: (GoogleMapController controller){
             _mapcontroller.complete(controller);
@@ -435,14 +442,17 @@ void initState() {
                   myLocationButtonEnabled: true
                   ,
                   markers: _marker,
-                  polygons: {
-                    Polygon(
-                        polygonId: PolygonId("1"),
-                        points: latLen,
-                        fillColor: Color(0xFF006491).withOpacity(0.2),
-                        strokeWidth: 2
-                    ),
-                  }
+                  polylines: _polyline,
+
+
+                  // polygons: {
+                  //   Polygon(
+                  //       polygonId: PolygonId("1"),
+                  //       points: latLen,
+                  //       fillColor: Color(0xFF006491).withOpacity(0.2),
+                  //       strokeWidth: 2
+                  //   ),
+                  // }
               ),
             ),
 

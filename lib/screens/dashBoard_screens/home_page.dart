@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
-import 'package:form_robo/screens/land_profiles.dart';
+import 'package:form_robo/screens/dashBoard_screens/widgets/droneconnectiong_screen.dart';
+import 'package:form_robo/screens/land_profile_screens/land_profiles.dart';
 import 'package:form_robo/screens/settings_screen.dart';
 import 'package:form_robo/screens/testing_page.dart';
 import 'package:form_robo/screens/testings/testing_page_one.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  bool conncted = false;
+  bool conncted = true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
                 bottom: 0,
                 left: 40,
                 right: 40,
+
                 child: Image.asset(
                   'assets/images/drone.png',
                   width: 200,
@@ -61,8 +63,8 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(width: 30,),
                         InkWell(
                           onTap: (){
-                            // NavigationService().navigatePage(SettingsPage());
-                            NavigationService().navigatePage(TestingPage());
+                            NavigationService().navigatePage(SettingsPage());
+                           // NavigationService().navigatePage(TestingPage());
                           },
                             child: Text("Settings")),
 
@@ -95,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                 bottom: 20,
                 left: 20,
                 right: 20,
-                child: Row(
+                child:conncted ?   Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
@@ -139,33 +141,126 @@ class _HomePageState extends State<HomePage> {
                     ),
 
 
-                     conncted ?
+                    // conncted ?
+
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          //conncted = !conncted;
+                        });
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        alignment: Alignment.center,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            color: ThemeConfig.primary
+                        ),
+                        child: Text("FLY",style: ThemeConfig.textStylewhite16,),
+                      ),
+                    )
+                    //     :
+                    //
+                    // InkWell(
+                    //   onTap: (){
+                    //     setState(() {
+                    //       conncted = !conncted;
+                    //     });
+                    //     NavigationService().navigatePage(DroneConnection());
+                    //     // Navigator.push(context, MaterialPageRoute(builder: (context) => DroneConnection()));
+                    //   },
+                    //   child: Container(
+                    //     padding: EdgeInsets.symmetric(horizontal: 40),
+                    //     alignment: Alignment.center,
+                    //     height: 40,
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(6),
+                    //         color: ThemeConfig.primary
+                    //     ),
+                    //     child: Text("Connect",style: ThemeConfig.textStylewhite16,),
+                    //   ),
+                    // )
+                  ],
+                )  :
+
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Text("Max. Speed",style: ThemeConfig.minimumStyleGrey,),
+                        SizedBox(height: 4,),
+                        Text("--",style: ThemeConfig.primary14,)
+                      ],
+                    ),
+                    ThemeConfig.divider,
+                    Column(
+                      children: [
+                        Text("Fuel Consumption",style: ThemeConfig.minimumStyleGrey,),
+                        SizedBox(height: 4,),
+                        Text("--",style: ThemeConfig.primary14,)
+                      ],
+                    ),
+                    ThemeConfig.divider,
+                    Column(
+                      children: [
+                        Text("Fuel Left",style: ThemeConfig.minimumStyleGrey,),
+                        SizedBox(height: 4,),
+                        Text("--",style: ThemeConfig.primary14,)
+                      ],
+                    ),
+                    ThemeConfig.divider,
+                    Column(
+                      children: [
+                        Text("Range",style: ThemeConfig.minimumStyleGrey,),
+                        SizedBox(height: 4,),
+                        Text("--",style: ThemeConfig.primary14,)
+                      ],
+                    ),
+                    ThemeConfig.divider,
+                    Column(
+                      children: [
+                        Text("Battery Status",style: ThemeConfig.minimumStyleGrey,),
+                        SizedBox(height: 4,),
+                        Text("--",style: ThemeConfig.primary14,)
+                      ],
+                    ),
+
+
+                     // conncted ?
+
+                     // InkWell(
+                     //   onTap: (){
+                     //     setState(() {
+                     //       //conncted = !conncted;
+                     //     });
+                     //     Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                     //     //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                     //   },
+                     //   child: Container(
+                     //     padding: EdgeInsets.symmetric(horizontal: 40),
+                     //     alignment: Alignment.center,
+                     //     height: 40,
+                     //     decoration: BoxDecoration(
+                     //       borderRadius: BorderRadius.circular(6),
+                     //       color: ThemeConfig.primary
+                     //     ),
+                     //     child: Text("FLY",style: ThemeConfig.textStylewhite16,),
+                     //   ),
+                     // )
+                        // :
 
                      InkWell(
                        onTap: (){
                          setState(() {
                            conncted = !conncted;
                          });
-                         //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
-                       },
-                       child: Container(
-                         padding: EdgeInsets.symmetric(horizontal: 40),
-                         alignment: Alignment.center,
-                         height: 40,
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(6),
-                           color: ThemeConfig.primary
-                         ),
-                         child: Text("FLY",style: ThemeConfig.textStylewhite16,),
-                       ),
-                     ):
-
-                     InkWell(
-                       onTap: (){
-                         setState(() {
-                           conncted = !conncted;
-                         });
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                         NavigationService().navigatePage(DroneConnection());
+                         // Navigator.push(context, MaterialPageRoute(builder: (context) => DroneConnection()));
                        },
                        child: Container(
                          padding: EdgeInsets.symmetric(horizontal: 40),
@@ -180,6 +275,8 @@ class _HomePageState extends State<HomePage> {
                      )
                   ],
                 )
+
+
               )
 
             ],

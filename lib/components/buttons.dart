@@ -15,14 +15,14 @@ class AppElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 0),
       child: ElevatedButton(
         onPressed: onPress,
         style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).primaryColor,
             shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(ThemeConfig.borderRadius))),
-        child: AppButtonText(title),
+        child: AppButtonText(title,color: Colors.white,),
 
       ),
     );

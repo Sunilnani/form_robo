@@ -5,8 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/app_custom_card.dart';
 import 'package:form_robo/components/buttons.dart';
 import 'package:form_robo/components/theme_config.dart';
-import 'package:form_robo/screens/add_land_profile.dart';
-import 'package:form_robo/screens/fly_screen.dart';
+import 'package:form_robo/screens/land_profile_screens/add_land_profile.dart';
+import 'package:form_robo/screens/fly_screens/fly_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 class LandProfiles extends StatefulWidget {
@@ -68,15 +68,7 @@ class _LandProfilesState extends State<LandProfiles> {
     });
   }
 
-
-
-
-
   int _selectedIndex = 0;
-
-
-
-
 
  // bool _selectedIndex = false;
   Color _color = Colors.transparent;
@@ -156,13 +148,15 @@ class _LandProfilesState extends State<LandProfiles> {
                   onMapCreated: (controller){
                     _controller.complete(controller);
                   },
-                  markers: {
-                    Marker(
-                      markerId: MarkerId("1"),
-                      position: initialLocation,
-                      icon:markerbitmap
-                    )
-                  },
+
+                  // markers: {
+                  //   Marker(
+                  //     markerId: MarkerId("1"),
+                  //     position: initialLocation,
+                  //     icon:markerbitmap
+                  //   )
+                  // },
+
                   polygons: {
                     Polygon(
                         polygonId: PolygonId("1"),
@@ -172,7 +166,6 @@ class _LandProfilesState extends State<LandProfiles> {
                     ),
                   }
                 ),
-
 
         // GoogleMap(
         //   zoomControlsEnabled: false,
@@ -339,8 +332,6 @@ class _LandProfilesState extends State<LandProfiles> {
             ],
           )
         )
-
-
 
       ],
     ),

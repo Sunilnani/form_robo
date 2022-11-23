@@ -101,189 +101,6 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 SizedBox(height: 40,),
 
-
-                Row(
-                  children: [
-                    Text("Wifi                               ",
-                      style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
-                    SizedBox(width: 20,),
-
-
-                    Container(
-                      height: MediaQuery.of(context).size.height*0.1,
-                      width: MediaQuery.of(context).size.width*0.45,
-                      child: ListView.separated(
-                        //shrinkWrap: true,
-                        itemCount: sprayingSpeed.length,
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-
-                          // orderId = notifications!.orders![index].id;
-
-                          return InkWell(
-                            onTap: (){
-
-                              setState(() {
-                                // isSelected = !isSelected;
-                                _selectedIndex = index;
-                                selected_name=sprayingSpeed[index];
-                                print("---------------------------> index ${_selectedIndex}");
-
-                              });
-
-                            },
-                            child: Row(
-                              children: [
-                                Container(
-                                  alignment: Alignment.center,
-                                  decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                                    context,
-                                    radius: 4,
-                                    color: _selectedIndex == index ?  ThemeConfig.primary : Colors.white,),
-                                  height: 40,
-                                  width: 100,
-                                  child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                                )
-                              ],
-                            ),
-
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(height: 0);
-                        },
-                      ),
-                    ),
-
-
-
-                  ],
-                ),
-
-                SizedBox(height: 20,),
-
-                Row(
-                  children: [
-                    Text("GPS Automatic           ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
-                    SizedBox(width: 20,),
-
-
-                    Container(
-                      height: MediaQuery.of(context).size.height*0.1,
-                      width: MediaQuery.of(context).size.width*0.45,
-                      child: ListView.separated(
-                        //shrinkWrap: true,
-                        itemCount: mapType.length,
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-
-                          // orderId = notifications!.orders![index].id;
-
-                          return InkWell(
-                            onTap: (){
-
-                              setState(() {
-                                // isSelected = !isSelected;
-                                _selectedmapIndex = index;
-                                selected_map=mapType[index];
-                                print("---------------------------> index ${_selectedmapIndex}");
-
-                              });
-
-                            },
-                            child: Row(
-                              children: [
-                                Container(
-                                  alignment: Alignment.center,
-                                  decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                                    context,
-                                    radius: 4,
-                                    color: _selectedmapIndex == index ?   ThemeConfig.primary  : Colors.white,),
-                                  height: 40,
-                                  width: 100,
-                                  child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                                )
-                              ],
-                            ),
-
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(height: 0);
-                        },
-                      ),
-                    ),
-
-
-
-                  ],
-                ),
-
-
-                SizedBox(height: 20,),
-
-                Row(
-                  children: [
-                    Text("Mobile Network          ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
-                    SizedBox(width: 20,),
-
-
-                    Container(
-                      height: MediaQuery.of(context).size.height*0.1,
-                      width: MediaQuery.of(context).size.width*0.45,
-                      child: ListView.separated(
-                        //shrinkWrap: true,
-                        itemCount: mapType.length,
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-
-                          // orderId = notifications!.orders![index].id;
-
-                          return InkWell(
-                            onTap: (){
-
-                              setState(() {
-                                // isSelected = !isSelected;
-                                _selectedmapIndex = index;
-                                selected_map=mapType[index];
-                                print("---------------------------> index ${_selectedmapIndex}");
-
-                              });
-
-                            },
-                            child: Row(
-                              children: [
-                                Container(
-                                  alignment: Alignment.center,
-                                  decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                                    context,
-                                    radius: 4,
-                                    color: _selectedmapIndex == index ?   ThemeConfig.primary  : Colors.white,),
-                                  height: 40,
-                                  width: 100,
-                                  child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                                )
-                              ],
-                            ),
-
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(height: 0);
-                        },
-                      ),
-                    ),
-
-
-
-                  ],
-                ),
-
-                SizedBox(height: 20,),
-
                 Row(
                   children: [
                     Text("Sound Controll     ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
@@ -304,7 +121,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       divisions: 100,
                     ),
                     SizedBox(width: 20,),
-                   // Text("$currentvol"),
+                    // Text("$currentvol"),
 
 
                   ],
@@ -338,9 +155,187 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
 
 
+                // Row(
+                //   children: [
+                //     Text("Wifi                               ",
+                //       style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
+                //     SizedBox(width: 20,),
+                //
+                //
+                //     Container(
+                //       height: MediaQuery.of(context).size.height*0.1,
+                //       width: MediaQuery.of(context).size.width*0.45,
+                //       child: ListView.separated(
+                //         //shrinkWrap: true,
+                //         itemCount: sprayingSpeed.length,
+                //         physics: BouncingScrollPhysics(),
+                //         scrollDirection: Axis.horizontal,
+                //         itemBuilder: (context, index) {
+                //
+                //           // orderId = notifications!.orders![index].id;
+                //
+                //           return InkWell(
+                //             onTap: (){
+                //
+                //               setState(() {
+                //                 // isSelected = !isSelected;
+                //                 _selectedIndex = index;
+                //                 selected_name=sprayingSpeed[index];
+                //                 print("---------------------------> index ${_selectedIndex}");
+                //
+                //               });
+                //
+                //             },
+                //             child: Row(
+                //               children: [
+                //                 Container(
+                //                   alignment: Alignment.center,
+                //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                //                     context,
+                //                     radius: 4,
+                //                     color: _selectedIndex == index ?  ThemeConfig.primary : Colors.white,),
+                //                   height: 40,
+                //                   width: 100,
+                //                   child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                //                 )
+                //               ],
+                //             ),
+                //
+                //           );
+                //         },
+                //         separatorBuilder: (BuildContext context, int index) {
+                //           return const SizedBox(height: 0);
+                //         },
+                //       ),
+                //     ),
+                //
+                //
+                //
+                //   ],
+                // ),
+                //
+                // SizedBox(height: 20,),
+                //
+                // Row(
+                //   children: [
+                //     Text("GPS Automatic           ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
+                //     SizedBox(width: 20,),
+                //
+                //
+                //     Container(
+                //       height: MediaQuery.of(context).size.height*0.1,
+                //       width: MediaQuery.of(context).size.width*0.45,
+                //       child: ListView.separated(
+                //         //shrinkWrap: true,
+                //         itemCount: mapType.length,
+                //         physics: BouncingScrollPhysics(),
+                //         scrollDirection: Axis.horizontal,
+                //         itemBuilder: (context, index) {
+                //
+                //           // orderId = notifications!.orders![index].id;
+                //
+                //           return InkWell(
+                //             onTap: (){
+                //
+                //               setState(() {
+                //                 // isSelected = !isSelected;
+                //                 _selectedmapIndex = index;
+                //                 selected_map=mapType[index];
+                //                 print("---------------------------> index ${_selectedmapIndex}");
+                //
+                //               });
+                //
+                //             },
+                //             child: Row(
+                //               children: [
+                //                 Container(
+                //                   alignment: Alignment.center,
+                //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                //                     context,
+                //                     radius: 4,
+                //                     color: _selectedmapIndex == index ?   ThemeConfig.primary  : Colors.white,),
+                //                   height: 40,
+                //                   width: 100,
+                //                   child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                //                 )
+                //               ],
+                //             ),
+                //
+                //           );
+                //         },
+                //         separatorBuilder: (BuildContext context, int index) {
+                //           return const SizedBox(height: 0);
+                //         },
+                //       ),
+                //     ),
+                //
+                //
+                //
+                //   ],
+                // ),
+                //
+                //
+                // SizedBox(height: 20,),
+                //
+                // Row(
+                //   children: [
+                //     Text("Mobile Network          ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
+                //     SizedBox(width: 20,),
+                //
+                //
+                //     Container(
+                //       height: MediaQuery.of(context).size.height*0.1,
+                //       width: MediaQuery.of(context).size.width*0.45,
+                //       child: ListView.separated(
+                //         //shrinkWrap: true,
+                //         itemCount: mapType.length,
+                //         physics: BouncingScrollPhysics(),
+                //         scrollDirection: Axis.horizontal,
+                //         itemBuilder: (context, index) {
+                //
+                //           // orderId = notifications!.orders![index].id;
+                //
+                //           return InkWell(
+                //             onTap: (){
+                //
+                //               setState(() {
+                //                 // isSelected = !isSelected;
+                //                 _selectedmapIndex = index;
+                //                 selected_map=mapType[index];
+                //                 print("---------------------------> index ${_selectedmapIndex}");
+                //
+                //               });
+                //
+                //             },
+                //             child: Row(
+                //               children: [
+                //                 Container(
+                //                   alignment: Alignment.center,
+                //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                //                     context,
+                //                     radius: 4,
+                //                     color: _selectedmapIndex == index ?   ThemeConfig.primary  : Colors.white,),
+                //                   height: 40,
+                //                   width: 100,
+                //                   child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                //                 )
+                //               ],
+                //             ),
+                //
+                //           );
+                //         },
+                //         separatorBuilder: (BuildContext context, int index) {
+                //           return const SizedBox(height: 0);
+                //         },
+                //       ),
+                //     ),
+                //
+                //
+                //
+                //   ],
+                // ),
 
-
-
+                //SizedBox(height: 20,),
 
               ],
             ),

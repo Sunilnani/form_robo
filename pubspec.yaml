@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   page_transition: any
   font_awesome_flutter: ^10.1.0
+  dropdown_search: ^4.0.0
 
   location: ^4.3.0
   geocoding: ^2.0.1
