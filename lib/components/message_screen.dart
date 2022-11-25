@@ -88,8 +88,10 @@ class _MessagePageState extends State<MessagePage> {
                 // AppElevatedButton(title: widget.btnTitle ?? "OKAY", onPress: (){
                 //   //Navigator.push(context, MaterialPageRoute(builder: (context)=> nextPage),);
                 //   NavigationService().navigatePage(
-                //       widget.nextPage,replaceAll: true);
+                //       nextPage);
                 // },)
+
+
               ],
             ),
           ),

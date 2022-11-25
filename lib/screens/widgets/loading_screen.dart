@@ -23,7 +23,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         title: "Drone Connected Successfully",
         description:"Your drone was connected and redirecting to fly / action page.",
        // nextPage:FlyScreen(),
-      ),replaceAll: true);
+      ));
 
 
     });
@@ -71,7 +71,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     // Step 7
     // final hours = strDigits(myDuration.inHours.remainder(1));
     // final minutes = strDigits(myDuration.inMinutes.remainder(60));
-    final seconds = strDigits(myDuration.inSeconds.remainder(20));
+    final seconds = strDigits(myDuration.inSeconds.remainder(10));
 
 
     return Scaffold(
@@ -93,7 +93,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
             Text("Drone Preparing to TakeOff",style: TextStyle(fontSize: 20,color: Colors.green),),
             SizedBox(height: 10,),
-            Text("You have only 20 sec Time to stop this takeoff",style: ThemeConfig.textStyleGrey14,),
+            Text("You have only 10 sec Time to stop this takeoff",style: ThemeConfig.textStyleGrey14,),
             SizedBox(height: 10,),
             Text("If not you are allowing the drone to take off",style: ThemeConfig.textStyleGrey14,),
 

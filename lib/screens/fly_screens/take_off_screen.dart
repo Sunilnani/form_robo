@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:form_robo/screens/fly_screens/widgets/emergency_land_message_card.dart';
+import 'package:form_robo/screens/land_profile_screens/land_profiles.dart';
 import 'package:form_robo/screens/widgets/loading_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 class TakeOffScreen extends StatefulWidget {
-  const TakeOffScreen({Key? key}) : super(key: key);
+  const TakeOffScreen({Key? key,this.isEmergency}) : super(key: key);
+  final bool? isEmergency;
 
   @override
   State<TakeOffScreen> createState() => _TakeOffScreenState();
@@ -42,9 +45,6 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
 
 
   int _selectedIndex = 0;
-
-
-
 
 
   // bool _selectedIndex = false;
@@ -141,6 +141,7 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
     super.dispose();
   }
 
+  bool? isEmergency;
 
 
   @override
@@ -475,7 +476,7 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                         height: 40,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
-                            color: ThemeConfig.redColor
+                            color: widget.isEmergency == true? ThemeConfig.lightGreyColor:ThemeConfig.redColor
                         ),
                         child: Text("Emergency Landing",style: ThemeConfig.textStyleWhite14,),
                       ),
@@ -525,40 +526,45 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
             ),
             title: Text("Do you want to confirm the emergency landing?"),
             actions: <Widget>[
-
-              TextButton(
-                onPressed: () {
-                  //Navigator.of(ctx).pop();
-                },
-                child:  Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  alignment: Alignment.center,
-                  height: 40,
-                  width: 120,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: ThemeConfig.primary)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    //Navigator.of(ctx).pop();
+                  },
+                  child:  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.center,
+                    height: 40,
+                    width: 120,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(color: ThemeConfig.primary)
                       //color: ThemeConfig.primary
+                    ),
+                    child: Text("NO",style:ThemeConfig.primary14,),
                   ),
-                  child: Text("NO",style:ThemeConfig.primary14,),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  //Navigator.of(ctx).pop();
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  alignment: Alignment.center,
-                  height: 40,
-                  width: 120,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: ThemeConfig.primary
+                TextButton(
+                  onPressed: () {
+                    // Navigator.of(ctx).pop();
+                    NavigationService().navigatePage(EmergencyLandLoadScreen());
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.center,
+                    height: 40,
+                    width: 120,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: ThemeConfig.primary
+                    ),
+                    child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
                   ),
-                  child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
                 ),
-              ),
+              ],
+            )
             ],
           );
         });
@@ -578,7 +584,7 @@ class SignalParametersCard extends StatelessWidget {
       children: [
         InkWell(
           onTap: (){
-            NavigationService().pop();
+           NavigationService().navigatePage(LandProfiles());
           },
           child: Row(
             children: [

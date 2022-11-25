@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_robo/components/buttons.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:form_robo/screens/dashBoard_screens/home_page.dart';
 import 'package:form_robo/screens/fly_screens/fly_screen.dart';
 import 'package:form_robo/screens/fly_screens/take_off_screen.dart';
 import 'package:form_robo/screens/land_profile_screens/land_profiles.dart';
@@ -11,13 +12,14 @@ import 'package:form_robo/screens/land_profile_screens/land_profiles.dart';
 
 class DroneMessagePage extends StatefulWidget {
   final String title;
+  final bool? isConnected;
   final String ?image;
   final String ?messageType;
   final String ? description;
   final double ? imageHeight;
   final Widget? nextPage;
   final String ? btnTitle;
-  const DroneMessagePage({Key? key, required this.title, this.description,
+  const DroneMessagePage({Key? key, required this.title, this.description,this.isConnected,
     this.nextPage, this.image, this.messageType,this.imageHeight, this.btnTitle}) : super(key: key);
 
   @override
@@ -28,7 +30,7 @@ class _DroneMessagePageState extends State<DroneMessagePage> {
 
   void splash(){
     Future.delayed(Duration(seconds: 2),(){
-      NavigationService().navigatePage(LandProfiles(),replace: true);
+      NavigationService().navigatePage(HomePage(isConnected: true,),replace: true);
 
       // NavigationService().navigatePage(MessagePage(
       //   title: "Drone Connected Successfully",

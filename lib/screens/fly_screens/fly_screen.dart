@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:form_robo/screens/land_profile_screens/land_profiles.dart';
 import 'package:form_robo/screens/widgets/loading_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -494,7 +495,7 @@ class _FlyScreenState extends State<FlyScreen> {
                             borderRadius: BorderRadius.circular(6),
                             color: ThemeConfig.primary
                         ),
-                        child: Text("Connect",style: ThemeConfig.textStylewhite16,),
+                        child: Text("Fly",style: ThemeConfig.textStylewhite16,),
                       ),
                     )
                   ],

@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/app_custom_card.dart';
 import 'package:form_robo/components/buttons.dart';
+import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
 import 'package:form_robo/screens/land_profile_screens/add_land_profile.dart';
 import 'package:form_robo/screens/fly_screens/fly_screen.dart';
+import 'package:form_robo/screens/settings_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 class LandProfiles extends StatefulWidget {
@@ -112,28 +114,35 @@ class _LandProfilesState extends State<LandProfiles> {
         actions: [
 
           Padding(
-            padding: const EdgeInsets.only(right: 20.0),
+            padding: const EdgeInsets.only(right: 10.0),
             child: Center(
                 child:  InkWell(
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => AddLandProfile()));
                   },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    alignment: Alignment.center,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: ThemeConfig.primary
-                    ),
-                    child: Text("Add Profile",style: ThemeConfig.textStylewhite16,),
-                  ),
+                  child: Text("Add New Profile",style: ThemeConfig.redColor14,),
+                  // child: Container(
+                  //   padding: EdgeInsets.symmetric(horizontal: 20),
+                  //   alignment: Alignment.center,
+                  //   height: 40,
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(6),
+                  //       color: ThemeConfig.primary
+                  //   ),
+                  //   child: Text("Add New Profile",style: ThemeConfig.textStylewhite16,),
+                  // ),
                 )
             ),
           ),
 
 
-          const SizedBox(width: 4,)
+          IconButton(
+              onPressed: (){
+                NavigationService().navigatePage(SettingsPage());
+              },
+              icon: Icon(FontAwesomeIcons.gear,size: 18,)
+          ),
+          const SizedBox(width: 6,),
         ],
       ),
       body:

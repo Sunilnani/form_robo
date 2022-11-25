@@ -350,7 +350,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
         iconTheme: IconThemeData(color: ThemeConfig.primary),
         title: Expanded(
           child: Text(
-            "Add Maps",
+            "Add Map Boundaries",
             overflow: TextOverflow.visible,
             softWrap: true,
             style: Theme.of(context).textTheme.headline5!.copyWith(
@@ -458,10 +458,12 @@ class _AddMapScreenState extends State<AddMapScreen> {
             ),
 
 
-            Positioned(
-
-                child:InstructionCard()
-            ),
+            // Positioned(
+            //   bottom: 20,
+            //     left: 50,
+            //     right: 50,
+            //     child:InstructionCard()
+            // ),
 
             Positioned(
               top: 20,

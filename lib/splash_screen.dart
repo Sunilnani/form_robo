@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void splash(){
     Future.delayed(Duration(seconds: 2),(){
-      NavigationService().navigatePage(LoginPage());
+      NavigationService().navigatePage(HomePage());
     });
   }
 

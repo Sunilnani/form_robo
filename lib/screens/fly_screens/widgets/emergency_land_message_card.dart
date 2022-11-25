@@ -7,25 +7,28 @@ import 'package:form_robo/components/theme_config.dart';
 import 'package:form_robo/screens/dashBoard_screens/home_page.dart';
 import 'package:form_robo/screens/dashBoard_screens/widgets/drone_message_screen.dart';
 import 'package:form_robo/screens/fly_screens/fly_screen.dart';
+import 'package:form_robo/screens/fly_screens/take_off_screen.dart';
+import 'package:form_robo/screens/fly_screens/widgets/drone_land_success_message_card.dart';
 
-class DroneConnection extends StatefulWidget {
-  const DroneConnection({Key? key, this.isconnected}) : super(key: key);
-  final bool? isconnected;
+class EmergencyLandLoadScreen extends StatefulWidget {
+  const EmergencyLandLoadScreen({Key? key, this.isEmergency}) : super(key: key);
+  final bool? isEmergency;
 
   @override
-  State<DroneConnection> createState() => _DroneConnectionState();
+  State<EmergencyLandLoadScreen> createState() => _EmergencyLandLoadScreenState();
 }
 
-class _DroneConnectionState extends State<DroneConnection> {
+class _EmergencyLandLoadScreenState extends State<EmergencyLandLoadScreen> {
 
   void splash(){
     Future.delayed(Duration(seconds: 4),(){
-      //NavigationService().navigatePage(FlyScreen());
+      //NavigationService().navigatePage(TakeOffScreen());
 
-      NavigationService().navigatePage(DroneMessagePage(
-        title: "Drone Connected Successfully",
-        description:"Your drone was connected and redirecting to fly / action page.",
-        // nextPage:NavigationService().navigatePage(HomePage()),
+      NavigationService().navigatePage(
+          DroneLandSuccessMessage(
+        title: "Drone Landed Successfully",
+        //description:"Your drone was connected and redirecting to fly / action page.",
+        //nextPage:,
       ));
 
 
@@ -90,12 +93,13 @@ class _DroneConnectionState extends State<DroneConnection> {
                 height: 175.0,
                 width: 175.0,
               ),
-             // Image.network("https://gifimage.net/wp-content/uploads/2017/10/drone-gif-4.gif",width: 180,),
+              // Image.network("https://gifimage.net/wp-content/uploads/2017/10/drone-gif-4.gif",width: 180,),
             ),
+            SizedBox(height: 20,),
 
-            Text("Connecting to Drone....!",style: TextStyle(fontSize: 20,color:Theme.of(context).primaryColor),),
+            Text("Emergency Landing....",style: TextStyle(fontSize: 20,color:Theme.of(context).primaryColor),),
             SizedBox(height: 10,),
-            Text("Your Drone was disconnected check the device properly",style: ThemeConfig.textStyleGrey14,),
+            Text("Your Drone was disconnected check whether its far from you",style: ThemeConfig.textStyleGrey14,),
 
 
             SizedBox(height: 10,),

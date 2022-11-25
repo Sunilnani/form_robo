@@ -332,6 +332,9 @@ class ThemeConfig {
   static TextStyle primary20= TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: ThemeConfig.primary);
 
 
+  static TextStyle redColor14= TextStyle(fontSize: 14,fontWeight: FontWeight.w600,color: Colors.red);
+
+
 
 
   static TextStyle? textStyleTitle(context) => TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 1);
