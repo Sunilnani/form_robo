@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
 import 'package:form_robo/screens/widgets/instructions_card.dart';
 import 'package:geolocator/geolocator.dart';
@@ -304,6 +305,13 @@ class _AddMapScreenState extends State<AddMapScreen> {
   int _selectedIndex = 0;
 
 
+  List<String> mapTypeList=["Normal","Satellite",];
+
+  String? selected_map_type;
+
+
+  int _selectedMapIndex = 0;
+
   //final Set<Marker> markers = new Set();
 
 
@@ -381,7 +389,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
 
                 initialCameraPosition: _kGoogle,
 
-                mapType: MapType.normal,
+               mapType:_selectedMapIndex ==  0 ?  MapType.normal: MapType.satellite,
 
                 markers: _markers,
 
@@ -424,12 +432,11 @@ class _AddMapScreenState extends State<AddMapScreen> {
             //   ),
             // )
 
-
                 :
-
 
             Expanded(
               child: GoogleMap(
+                mapType: _selectedMapIndex ==  0 ?  MapType.normal: MapType.satellite,
                 rotateGesturesEnabled: true,
                 zoomControlsEnabled: true,
                 initialCameraPosition:CameraPosition(
@@ -457,13 +464,64 @@ class _AddMapScreenState extends State<AddMapScreen> {
               ),
             ),
 
+            Positioned(
+              top: 20,
+              left: 20,
 
-            // Positioned(
-            //   bottom: 20,
-            //     left: 50,
-            //     right: 50,
-            //     child:InstructionCard()
-            // ),
+              child: Container(
+                padding: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white,
+                ),
+
+                height: MediaQuery.of(context).size.height*0.11,
+                // width: MediaQuery.of(context).size.width*0.45,
+                child: ListView.separated(
+                  //shrinkWrap: true,
+                  itemCount: mapTypeList.length,
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+
+                    // orderId = notifications!.orders![index].id;
+
+                    return InkWell(
+                      onTap: (){
+
+                        setState(() {
+                          // isSelected = !isSelected;
+                          _selectedMapIndex = index;
+                          selected_map_type=mapTypeList[index];
+                          print("---------------------------> index ${_selectedMapIndex}");
+
+                        });
+
+                      },
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(4),
+                            alignment: Alignment.center,
+                            decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                              context,
+                              radius: 4,
+                              color: _selectedMapIndex == index ?  ThemeConfig.primary : Colors.white,),
+                            height: 50,
+                            width: 100,
+                            child: Text("${mapTypeList[index]}",style: _selectedMapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                          )
+                        ],
+                      ),
+
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(height: 0);
+                  },
+                ),
+              ),
+            ),
 
             Positioned(
               top: 20,
@@ -525,6 +583,8 @@ class _AddMapScreenState extends State<AddMapScreen> {
             ),
 
 
+            _selectedIndex == 0?
+
             Positioned(
                 bottom: 20,
                 left: 280,
@@ -557,7 +617,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
                     child:getgpsEnsble?  Text("End",style: ThemeConfig.textStylewhite16,):Text("Start",style: ThemeConfig.textStylewhite16,),
                   ),
                 )
-            ),
+            ):SizedBox(),
 
             // Positioned(
             //   bottom: 30,
@@ -576,12 +636,6 @@ class _AddMapScreenState extends State<AddMapScreen> {
             //     },
             //       child: Text("button")),
             // ),
-
-
-
-
-
-
 
           ],
         ),
@@ -607,6 +661,72 @@ class _AddMapScreenState extends State<AddMapScreen> {
       print("================================================================>${latLen}");
     });
   }
+
+  _sortbyForm(){
+
+    return  showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          int selectedRadio = 0;
+          return AlertDialog(
+            content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: List<Widget>.generate(1, (int index) {
+                    return Text("if yes, please click on confirm button to activate it");
+                  }),
+                );
+              },
+            ),
+            title: Text("Do you want to confirm the emergency landing?"),
+            actions: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      //Navigator.of(ctx).pop();
+                    },
+                    child:  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: ThemeConfig.primary)
+                        //color: ThemeConfig.primary
+                      ),
+                      child: Text("NO",style:ThemeConfig.primary14,),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Navigator.of(ctx).pop();
+                      NavigationService().pop();
+                      //NavigationService().navigatePage(EmergencyLandLoadScreen());
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: ThemeConfig.primary
+                      ),
+                      child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          );
+        });
+  }
+
+
 }
 
 

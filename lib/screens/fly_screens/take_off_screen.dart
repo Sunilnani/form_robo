@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:form_robo/screens/fly_screens/fly_screen.dart';
 import 'package:form_robo/screens/fly_screens/widgets/emergency_land_message_card.dart';
+import 'package:form_robo/screens/fly_screens/widgets/home_return_message_card.dart';
 import 'package:form_robo/screens/land_profile_screens/land_profiles.dart';
+import 'package:form_robo/screens/settings_screen.dart';
 import 'package:form_robo/screens/widgets/loading_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -464,31 +467,34 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                         ],
                       ),
                     ),
-                    InkWell(
-                      onTap: (){
-                        _sortbyForm();
-                       // startTimer();
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        alignment: Alignment.center,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            color: widget.isEmergency == true? ThemeConfig.lightGreyColor:ThemeConfig.redColor
-                        ),
-                        child: Text("Emergency Landing",style: ThemeConfig.textStyleWhite14,),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: (){
+                    //
+                    //     widget.isEmergency == true ? null :
+                    //     _sortbyForm();
+                    //    // startTimer();
+                    //     //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                    //   },
+                    //   child: Container(
+                    //     padding: EdgeInsets.symmetric(horizontal: 20),
+                    //     alignment: Alignment.center,
+                    //     height: 40,
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(6),
+                    //         color: widget.isEmergency == true? ThemeConfig.lightGreyColor:ThemeConfig.redColor
+                    //     ),
+                    //     child: Text("Emergency Landing",style: ThemeConfig.textStyleWhite14,),
+                    //   ),
+                    // ),
 
                     InkWell(
                       onTap: (){
-                        startTimer();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoadingScreen()));
+                        _returnHomeForm();
+                        // startTimer();
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => LoadingScreen()));
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                         alignment: Alignment.center,
                         height: 40,
                         decoration: BoxDecoration(
@@ -549,7 +555,8 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                 TextButton(
                   onPressed: () {
                     // Navigator.of(ctx).pop();
-                    NavigationService().navigatePage(EmergencyLandLoadScreen());
+                     NavigationService().navigatePage(EmergencyLandLoadScreen());
+
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
@@ -565,6 +572,74 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                 ),
               ],
             )
+            ],
+          );
+        });
+  }
+
+  _returnHomeForm(){
+
+    return  showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          int selectedRadio = 0;
+          return AlertDialog(
+            content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: List<Widget>.generate(1, (int index) {
+                    return Text("if yes, please click on confirm button to activate it");
+                  }),
+                );
+              },
+            ),
+            title: Text("Do you want to return to the Home Page?"),
+            actions: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      //Navigator.of(ctx).pop();
+                    },
+                    child:  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: ThemeConfig.primary)
+                        //color: ThemeConfig.primary
+                      ),
+                      child: Text("NO",style:ThemeConfig.primary14,),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Navigator.of(ctx).pop();
+                      // NavigationService().navigatePage(FlyScreen(),replace: true);
+                      NavigationService().navigatePage(HomeReturnMessagePage(
+                        title: "Drone Landing...",
+                        description:"",
+                        nextPage:FlyScreen(),
+                      ),replace: true);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: ThemeConfig.primary
+                      ),
+                      child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
+                    ),
+                  ),
+                ],
+              )
             ],
           );
         });
@@ -769,7 +844,11 @@ class SignalParametersCard extends StatelessWidget {
             SizedBox(width: 8,),
 
 
-            Icon(Icons.settings,color: Theme.of(context).primaryColor,size: 20,)
+            InkWell(
+              onTap: (){
+                NavigationService().navigatePage(SettingsPage());
+              },
+                child: Icon(Icons.settings,color: Theme.of(context).primaryColor,size: 20,))
 
 
           ],

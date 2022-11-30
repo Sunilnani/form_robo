@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
-import 'package:form_robo/screens/land_profile_screens/add_map_screen.dart';
+import 'package:form_robo/screens/add_map_screens/add_map_screen.dart';
 class InstructionCard extends StatefulWidget {
   const InstructionCard({Key? key,this.ismap}) : super(key: key);
   final bool? ismap;

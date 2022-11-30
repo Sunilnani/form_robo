@@ -8,7 +8,7 @@ import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/text_form_fields.dart';
 import 'package:form_robo/components/theme_config.dart';
 import 'package:form_robo/screens/add_map_screens/add_map_instruction_screen.dart';
-import 'package:form_robo/screens/land_profile_screens/add_map_screen.dart';
+import 'package:form_robo/screens/add_map_screens/add_map_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:perfect_volume_control/perfect_volume_control.dart';
 class AddLandProfile extends StatefulWidget {

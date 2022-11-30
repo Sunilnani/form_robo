@@ -5,8 +5,7 @@ import 'package:form_robo/screens/dashBoard_screens/widgets/droneconnectiong_scr
 import 'package:form_robo/screens/fly_screens/fly_screen.dart';
 import 'package:form_robo/screens/land_profile_screens/land_profiles.dart';
 import 'package:form_robo/screens/settings_screen.dart';
-import 'package:form_robo/screens/testing_page.dart';
-import 'package:form_robo/screens/testings/testing_page_one.dart';
+
 
 
 class HomePage extends StatefulWidget {
@@ -99,7 +98,9 @@ class _HomePageState extends State<HomePage> {
                 bottom: 20,
                 left: 20,
                 right: 20,
-                child:widget.isConnected  == true ?   Row(
+                child:widget.isConnected  == true ?
+
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
@@ -186,7 +187,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 )  :
 
-
               DisconnectedParameters()
 
 
@@ -254,28 +254,7 @@ class _DisconnectedParametersState extends State<DisconnectedParameters> {
           ],
         ),
 
-        // conncted ?
 
-        // InkWell(
-        //   onTap: (){
-        //     setState(() {
-        //       //conncted = !conncted;
-        //     });
-        //     Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
-        //     //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
-        //   },
-        //   child: Container(
-        //     padding: EdgeInsets.symmetric(horizontal: 40),
-        //     alignment: Alignment.center,
-        //     height: 40,
-        //     decoration: BoxDecoration(
-        //       borderRadius: BorderRadius.circular(6),
-        //       color: ThemeConfig.primary
-        //     ),
-        //     child: Text("FLY",style: ThemeConfig.textStylewhite16,),
-        //   ),
-        // )
-        // :
 
         InkWell(
           onTap: (){

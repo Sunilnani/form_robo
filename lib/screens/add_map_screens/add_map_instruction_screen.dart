@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:form_robo/screens/add_map_screens/add_map_screen.dart';
 import 'package:form_robo/screens/widgets/instructions_card.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -363,174 +365,165 @@ class _MapInstructionScreenState extends State<MapInstructionScreen> {
         child: Stack(
           children: [
 
-
-
-            _selectedIndex == 1?
-
-
-            Expanded(
-              child: GoogleMap(
-                onTap: _handleTap,
-
-                initialCameraPosition: _kGoogle,
-
-                mapType: MapType.normal,
-
-                markers: _markers,
-
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true,
-
-                compassEnabled: true,
-
-                // polylines: _polyline,
-
-                polygons: {
-                  Polygon(
-                      polygonId: PolygonId("1"),
-                      points: latLan,
-                      fillColor: Color(0xFF006491).withOpacity(0.2),
-                      strokeWidth: 2
+            InkWell(
+              onTap: (){
+                NavigationService().navigatePage(AddMapScreen());
+              },
+              child: Container(
+                alignment: Alignment.center,
+                // padding: EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius:  10,
+                        spreadRadius: 2)
+                  ],
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage("assets/images/basemap.png",),
                   ),
-                },
 
-                onMapCreated: (GoogleMapController controller){
-                  _mapcontroller.complete(controller);
-                },
-              ),
-            )
-
-                :
-            Expanded(
-              child: GoogleMap(
-                rotateGesturesEnabled: true,
-                zoomControlsEnabled: true,
-                initialCameraPosition:CameraPosition(
-                  target: LatLng(position!.latitude, position!.longitude),
-                  zoom: 12.0,
                 ),
-                onMapCreated: (GoogleMapController controller){
-                  _controller = controller;
-                },
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true
-                ,
-                markers: _marker,
-                polylines: _polyline,
-
-
-                // polygons: {
-                //   Polygon(
-                //       polygonId: PolygonId("1"),
-                //       points: latLen,
-                //       fillColor: Color(0xFF006491).withOpacity(0.2),
-                //       strokeWidth: 2
-                //   ),
-                // }
+                height:MediaQuery.of(context).size.height,
+                width: double.infinity,
+                child: Text("Click here to add parameters"),
               ),
             ),
 
+            // _selectedIndex == 1?
+            //
+            //
+            // Expanded(
+            //   child: GoogleMap(
+            //     onTap: _handleTap,
+            //
+            //     initialCameraPosition: _kGoogle,
+            //
+            //     mapType: MapType.normal,
+            //
+            //     markers: _markers,
+            //
+            //     myLocationEnabled: true,
+            //     myLocationButtonEnabled: true,
+            //
+            //     compassEnabled: true,
+            //
+            //     // polylines: _polyline,
+            //
+            //     polygons: {
+            //       Polygon(
+            //           polygonId: PolygonId("1"),
+            //           points: latLan,
+            //           fillColor: Color(0xFF006491).withOpacity(0.2),
+            //           strokeWidth: 2
+            //       ),
+            //     },
+            //
+            //     onMapCreated: (GoogleMapController controller){
+            //       _mapcontroller.complete(controller);
+            //     },
+            //   ),
+            // )
+            //
+            //     :
+            // Expanded(
+            //   child: GoogleMap(
+            //     rotateGesturesEnabled: true,
+            //     zoomControlsEnabled: true,
+            //     initialCameraPosition:CameraPosition(
+            //       target: LatLng(position!.latitude, position!.longitude),
+            //       zoom: 12.0,
+            //     ),
+            //     onMapCreated: (GoogleMapController controller){
+            //       _controller = controller;
+            //     },
+            //     myLocationEnabled: true,
+            //     myLocationButtonEnabled: true
+            //     ,
+            //     markers: _marker,
+            //     polylines: _polyline,
+            //
+            //
+            //     // polygons: {
+            //     //   Polygon(
+            //     //       polygonId: PolygonId("1"),
+            //     //       points: latLen,
+            //     //       fillColor: Color(0xFF006491).withOpacity(0.2),
+            //     //       strokeWidth: 2
+            //     //   ),
+            //     // }
+            //   ),
+            // ),
+
 
             Positioned(
-                bottom: 20,
+                bottom: 10,
                 left: 50,
                 right: 50,
                 child:InstructionCard()
             ),
 
-            Positioned(
-              top: 20,
-              left: 280,
-              right: 280,
-              child: Container(
-                padding: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
-                ),
-
-                height: MediaQuery.of(context).size.height*0.11,
-                // width: MediaQuery.of(context).size.width*0.45,
-                child: ListView.separated(
-                  //shrinkWrap: true,
-                  itemCount: sprayingSpeed.length,
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-
-                    // orderId = notifications!.orders![index].id;
-
-                    return InkWell(
-                      onTap: (){
-
-                        setState(() {
-                          // isSelected = !isSelected;
-                          _selectedIndex = index;
-                          selected_name=sprayingSpeed[index];
-                          print("---------------------------> index ${_selectedIndex}");
-
-                        });
-
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(4),
-                            alignment: Alignment.center,
-                            decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                              context,
-                              radius: 4,
-                              color: _selectedIndex == index ?  ThemeConfig.primary : Colors.white,),
-                            height: 50,
-                            width: 100,
-                            child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                          )
-                        ],
-                      ),
-
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(height: 0);
-                  },
-                ),
-              ),
-            ),
-
-
             // Positioned(
-            //     bottom: 20,
-            //     left: 280,
-            //     right: 280,
-            //     child:  InkWell(
-            //       onTap: (){
+            //   top: 20,
+            //   left: 280,
+            //   right: 280,
+            //   child: Container(
+            //     padding: EdgeInsets.all(4),
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(8),
+            //       color: Colors.white,
+            //     ),
             //
-            //         if(getgpsEnsble)
-            //         {
-            //           getgpsEnsble = false;
-            //         }
-            //         else{
-            //           getgpsEnsble = true;
-            //           checkGps();
-            //         }
+            //     height: MediaQuery.of(context).size.height*0.11,
+            //     // width: MediaQuery.of(context).size.width*0.45,
+            //     child: ListView.separated(
+            //       //shrinkWrap: true,
+            //       itemCount: sprayingSpeed.length,
+            //       physics: BouncingScrollPhysics(),
+            //       scrollDirection: Axis.horizontal,
+            //       itemBuilder: (context, index) {
             //
-            //         setState(() {
+            //         // orderId = notifications!.orders![index].id;
             //
-            //         });
-            //         // Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+            //         return InkWell(
+            //           onTap: (){
+            //
+            //             setState(() {
+            //               // isSelected = !isSelected;
+            //               _selectedIndex = index;
+            //               selected_name=sprayingSpeed[index];
+            //               print("---------------------------> index ${_selectedIndex}");
+            //
+            //             });
+            //
+            //           },
+            //           child: Row(
+            //             children: [
+            //               Container(
+            //                 padding: EdgeInsets.all(4),
+            //                 alignment: Alignment.center,
+            //                 decoration: ThemeConfig.boxDecorationWithRoundBorder(
+            //                   context,
+            //                   radius: 4,
+            //                   color: _selectedIndex == index ?  ThemeConfig.primary : Colors.white,),
+            //                 height: 50,
+            //                 width: 100,
+            //                 child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+            //               )
+            //             ],
+            //           ),
+            //
+            //         );
             //       },
-            //       child: Container(
-            //         padding: EdgeInsets.symmetric(horizontal: 40),
-            //         alignment: Alignment.center,
-            //         height: 40,
-            //         decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(6),
-            //             color: ThemeConfig.primary
-            //         ),
-            //         child:getgpsEnsble?  Text("End",style: ThemeConfig.textStylewhite16,):Text("Start",style: ThemeConfig.textStylewhite16,),
-            //       ),
-            //     )
+            //       separatorBuilder: (BuildContext context, int index) {
+            //         return const SizedBox(height: 0);
+            //       },
+            //     ),
+            //   ),
             // ),
+
+
 
 
 
