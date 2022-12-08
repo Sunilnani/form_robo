@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:form_robo/screens/land_profile_screens/add_land_profile.dart';
 import 'package:form_robo/screens/widgets/instructions_card.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -152,7 +153,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
   bool servicestatus = false;
   bool haspermission = false;
   LocationPermission? permission;
-  Position? position;
+  late Position position;
   String long = "", lat = "";
   late StreamSubscription<Position> positionStream;
 
@@ -218,15 +219,15 @@ class _AddMapScreenState extends State<AddMapScreen> {
 
   getLocation() async {
     position = await Geolocator.getCurrentPosition();
-    print(position!.longitude); //Output: 80.24599079
-    print(position!.latitude); //Output: 29.6593457
+    print(position.longitude); //Output: 80.24599079
+    print(position.latitude); //Output: 29.6593457
 
-    long = position!.longitude.toString();
-    lat = position!.latitude.toString();
+    long = position.longitude.toString();
+    lat = position.latitude.toString();
 
     setState(() {
       //refresh UI
-      latLen.add(LatLng(position!.latitude, position!.longitude));
+      latLen.add(LatLng(position.latitude, position.longitude));
       _polyline.add(
           Polyline(
             polylineId: PolylineId('1'),
@@ -356,19 +357,25 @@ class _AddMapScreenState extends State<AddMapScreen> {
         elevation: 4,
         backgroundColor: ThemeConfig.whiteColor,
         iconTheme: IconThemeData(color: ThemeConfig.primary),
-        title: Expanded(
-          child: Text(
-            "Add Map Boundaries",
-            overflow: TextOverflow.visible,
-            softWrap: true,
-            style: Theme.of(context).textTheme.headline5!.copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
-        ),
+        centerTitle: true,
+        title: Text(
+          "Add Map Boundaries",
+          overflow: TextOverflow.visible,
+          softWrap: true,
+          style: Theme.of(context).textTheme.headline5!.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
 
       ),
       body: SafeArea(
-        child: Stack(
+        child:
+    //
+    //     _markers == null || _polyline == null || position == null ?
+    //     const Center(
+    //     child: CircularProgressIndicator(),
+    // )
+    // :
+        Stack(
           children: [
 
             // Container(
@@ -380,89 +387,67 @@ class _AddMapScreenState extends State<AddMapScreen> {
             //       }),
             // ),
 
-            _selectedIndex == 1?
+           _selectedIndex == 1?
 
 
-            Expanded(
-              child: GoogleMap(
-                onTap: _handleTap,
+            GoogleMap(
+              onTap: _handleTap,
+              initialCameraPosition: _kGoogle,
+              mapType:_selectedMapIndex ==  0 ?  MapType.normal: MapType.satellite,
+              markers: _markers,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
+              // compassEnabled: true,
 
-                initialCameraPosition: _kGoogle,
+              // polylines: _polyline,
 
-               mapType:_selectedMapIndex ==  0 ?  MapType.normal: MapType.satellite,
+              polygons: {
+                Polygon(
+                    polygonId: PolygonId("1"),
+                    points: latLan,
+                    fillColor: Color(0xFF006491).withOpacity(0.2),
+                    strokeWidth: 2
+                ),
+              },
 
-                markers: _markers,
-
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true,
-
-                compassEnabled: true,
-
-                // polylines: _polyline,
-
-                polygons: {
-                  Polygon(
-                      polygonId: PolygonId("1"),
-                      points: latLan,
-                      fillColor: Color(0xFF006491).withOpacity(0.2),
-                      strokeWidth: 2
-                  ),
-                },
-
-                onMapCreated: (GoogleMapController controller){
-                  _mapcontroller.complete(controller);
-                },
-              ),
+              onMapCreated: (GoogleMapController controller){
+                _mapcontroller.complete(controller);
+              },
             )
 
-            // Expanded(
-            //   child: GoogleMap(
-            //     initialCameraPosition: CameraPosition(
-            //       target: showLocation,
-            //       zoom: 15.0,
-            //     ),
-            //     mapType: MapType.normal,
-            //     markers: Set<Marker>.of(_markers),
-            //     onMapCreated: (controller) {
-            //       setState(() {
-            //         mapController = controller;
-            //       });
-            //     },
-            //     myLocationEnabled: true,
-            //   ),
-            // )
 
                 :
 
-            Expanded(
-              child: GoogleMap(
-                mapType: _selectedMapIndex ==  0 ?  MapType.normal: MapType.satellite,
-                rotateGesturesEnabled: true,
-                zoomControlsEnabled: true,
-                initialCameraPosition:CameraPosition(
-                  target: LatLng(position!.latitude, position!.longitude),
-                  zoom: 12.0,
-                ),
-                onMapCreated: (GoogleMapController controller){
-                  _controller = controller;
-                },
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true
-                ,
-                markers: _marker,
-                polylines: _polyline,
-
-
-                // polygons: {
-                //   Polygon(
-                //       polygonId: PolygonId("1"),
-                //       points: latLen,
-                //       fillColor: Color(0xFF006491).withOpacity(0.2),
-                //       strokeWidth: 2
-                //   ),
-                // }
+            GoogleMap(
+              mapType: _selectedMapIndex ==  0 ?  MapType.normal: MapType.satellite,
+              rotateGesturesEnabled: true,
+              zoomControlsEnabled: true,
+              initialCameraPosition:CameraPosition(
+                target: LatLng(position!.latitude, position!.longitude),
+                zoom: 13.0,
               ),
+              onMapCreated: (GoogleMapController controller){
+                _controller = controller;
+              },
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true
+              ,
+              markers: _marker,
+              polylines: _polyline,
+
+
+              // polygons: {
+              //   Polygon(
+              //       polygonId: PolygonId("1"),
+              //       points: latLen,
+              //       fillColor: Color(0xFF006491).withOpacity(0.2),
+              //       strokeWidth: 2
+              //   ),
+              // }
             ),
+
+
+
 
             Positioned(
               top: 20,
@@ -476,7 +461,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
                 ),
 
                 height: MediaQuery.of(context).size.height*0.11,
-                // width: MediaQuery.of(context).size.width*0.45,
+                 width: MediaQuery.of(context).size.width*0.25,
                 child: ListView.separated(
                   //shrinkWrap: true,
                   itemCount: mapTypeList.length,
@@ -525,8 +510,8 @@ class _AddMapScreenState extends State<AddMapScreen> {
 
             Positioned(
               top: 20,
-              left: 280,
-              right: 280,
+              left: 330,
+              right: 320,
               child: Container(
                 padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
@@ -535,6 +520,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
                 ),
 
                 height: MediaQuery.of(context).size.height*0.11,
+                width: MediaQuery.of(context).size.width*0.1,
                 // width: MediaQuery.of(context).size.width*0.45,
                 child: ListView.separated(
                   //shrinkWrap: true,
@@ -617,7 +603,28 @@ class _AddMapScreenState extends State<AddMapScreen> {
                     child:getgpsEnsble?  Text("End",style: ThemeConfig.textStylewhite16,):Text("Start",style: ThemeConfig.textStylewhite16,),
                   ),
                 )
-            ):SizedBox(),
+            ):
+
+            Positioned(
+              bottom: 20,
+              left: 280,
+              right: 280,
+              child: InkWell(
+                onTap: (){
+                  NavigationService().navigatePage(AddLandProfile(),replace: true);
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  alignment: Alignment.center,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: ThemeConfig.primary
+                  ),
+                  child:Text("Submit",style: ThemeConfig.textStylewhite16,),
+                ),
+              ),
+            ),
 
             // Positioned(
             //   bottom: 30,

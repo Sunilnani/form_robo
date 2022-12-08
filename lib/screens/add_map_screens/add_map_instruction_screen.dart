@@ -348,17 +348,16 @@ class _MapInstructionScreenState extends State<MapInstructionScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 4,
+        centerTitle: true,
         backgroundColor: ThemeConfig.whiteColor,
         iconTheme: IconThemeData(color: ThemeConfig.primary),
-        title: Expanded(
-          child: Text(
-            "Add Map Boundaries",
-            overflow: TextOverflow.visible,
-            softWrap: true,
-            style: Theme.of(context).textTheme.headline5!.copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
-        ),
+        title: Text(
+          "Add Map Boundaries",
+          overflow: TextOverflow.visible,
+          softWrap: true,
+          style: Theme.of(context).textTheme.headline5!.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
 
       ),
       body: SafeArea(

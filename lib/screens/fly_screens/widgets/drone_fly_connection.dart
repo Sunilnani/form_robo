@@ -7,22 +7,23 @@ import 'package:form_robo/components/theme_config.dart';
 import 'package:form_robo/screens/dashBoard_screens/home_page.dart';
 import 'package:form_robo/screens/dashBoard_screens/widgets/drone_message_screen.dart';
 import 'package:form_robo/screens/fly_screens/fly_screen.dart';
+import 'package:form_robo/screens/fly_screens/widgets/drone_connection_success_message.dart';
 
-class DroneConnection extends StatefulWidget {
-  const DroneConnection({Key? key, this.isconnected}) : super(key: key);
+class DroneFlyConnection extends StatefulWidget {
+  const DroneFlyConnection({Key? key, this.isconnected}) : super(key: key);
   final bool? isconnected;
 
   @override
-  State<DroneConnection> createState() => _DroneConnectionState();
+  State<DroneFlyConnection> createState() => _DroneFlyConnectionState();
 }
 
-class _DroneConnectionState extends State<DroneConnection> {
+class _DroneFlyConnectionState extends State<DroneFlyConnection> {
 
   void splash(){
     Future.delayed(Duration(seconds: 4),(){
       //NavigationService().navigatePage(FlyScreen());
 
-      NavigationService().navigatePage(DroneMessagePage(
+      NavigationService().navigatePage(DroneConnectSuccessMessage(
         title: "Drone Connected Successfully",
         description:"Your drone was connected and redirecting to fly / action page.",
         // nextPage:NavigationService().navigatePage(HomePage()),
@@ -100,7 +101,7 @@ class _DroneConnectionState extends State<DroneConnection> {
                     height: 175.0,
                     width: 175.0,
                   ),
-                 // Image.network("https://gifimage.net/wp-content/uploads/2017/10/drone-gif-4.gif",width: 180,),
+                  // Image.network("https://gifimage.net/wp-content/uploads/2017/10/drone-gif-4.gif",width: 180,),
                 ),
 
                 Text("Connecting to Drone....!",style: TextStyle(fontSize: 20,color:Theme.of(context).primaryColor),),

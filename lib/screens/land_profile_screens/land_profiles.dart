@@ -6,6 +6,7 @@ import 'package:form_robo/components/app_custom_card.dart';
 import 'package:form_robo/components/buttons.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:form_robo/screens/dashBoard_screens/home_page.dart';
 import 'package:form_robo/screens/land_profile_screens/add_land_profile.dart';
 import 'package:form_robo/screens/fly_screens/fly_screen.dart';
 import 'package:form_robo/screens/settings_screen.dart';
@@ -79,6 +80,9 @@ class _LandProfilesState extends State<LandProfiles> {
   bool isSelected = false;
 
 
+  bool? isconnect = false;
+
+
   List<String>  list= ["name","extra","double"];
 
   @override
@@ -98,17 +102,28 @@ class _LandProfilesState extends State<LandProfiles> {
     return Scaffold(
       appBar: AppBar(
         elevation: 4,
+        centerTitle: true,
         backgroundColor: ThemeConfig.whiteColor,
         iconTheme: IconThemeData(color: ThemeConfig.primary),
-        title: Expanded(
-          child: Text(
-            "Land Profiles",
-            overflow: TextOverflow.visible,
-            softWrap: true,
-            style: Theme.of(context).textTheme.headline5!.copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
+        // leadingWidth: 10,
+        leading: InkWell(
+          onTap: (){
+            NavigationService().navigatePage(HomePage(),replace: true);
+          },
+          child: Row(
+            children: [
+              Icon(Icons.arrow_back,size: 24,),
+
+            ],
+          ),
         ),
+        title: Text(
+          "Land Profiles",
+          overflow: TextOverflow.visible,
+          softWrap: true,
+          style: Theme.of(context).textTheme.headline5!.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
 
 
         actions: [
@@ -325,7 +340,7 @@ class _LandProfilesState extends State<LandProfiles> {
               SizedBox(width: 20,),
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => FlyScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => FlyScreen(isConnect: false,)));
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),

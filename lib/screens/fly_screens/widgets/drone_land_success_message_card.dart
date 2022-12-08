@@ -81,6 +81,7 @@ class _DroneLandSuccessMessageState extends State<DroneLandSuccessMessage> {
                  ),
                  child:  Icon(Icons.check,size: 30,color: Colors.white,),
                ),
+                SizedBox(height: 24,),
 
 
                 //Image.asset("assets/images/${messageType ??'success'}.png", height: imageHeight ?? 250,),

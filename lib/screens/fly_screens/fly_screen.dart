@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:form_robo/screens/dashBoard_screens/widgets/droneconnectiong_screen.dart';
+import 'package:form_robo/screens/fly_screens/widgets/drone_fly_connection.dart';
 import 'package:form_robo/screens/land_profile_screens/land_profiles.dart';
 import 'package:form_robo/screens/widgets/loading_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 class FlyScreen extends StatefulWidget {
-  const FlyScreen({Key? key}) : super(key: key);
+  const FlyScreen({Key? key , this.isConnect}) : super(key: key);
+  final bool? isConnect;
 
   @override
   State<FlyScreen> createState() => _FlyScreenState();
@@ -231,7 +234,7 @@ class _FlyScreenState extends State<FlyScreen> {
                   children: [
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height*0.3,
+                      height: MediaQuery.of(context).size.height*0.25,
                       width: MediaQuery.of(context).size.width*0.4,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
@@ -270,6 +273,19 @@ class _FlyScreenState extends State<FlyScreen> {
                                   Text("20 min",style: ThemeConfig.primary14,)
                                 ],
                               ),
+                              SizedBox(height: 10,),
+                              InkWell(
+                                onTap: (){
+                                  NavigationService().navigatePage(LandProfiles());
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(FontAwesomeIcons.handPointer,size: 12,color: Colors.grey,),
+                                    SizedBox(width: 4,),
+                                    Text("Click here to change the plan",style: ThemeConfig.Medium12grey,)
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                           Container(
@@ -279,7 +295,7 @@ class _FlyScreenState extends State<FlyScreen> {
                               borderRadius: BorderRadius.circular(6),
 
                             ),
-                            child: Image.asset("assets/images/wheat.png",width: 100,),
+                            child: Image.asset("assets/images/wheat.png",width: 80,),
                           ),
                         ],
                       ),
@@ -331,7 +347,8 @@ class _FlyScreenState extends State<FlyScreen> {
 
                         ],
                       ),
-                    )
+                    ),
+
                   ],
                 )
             ),
@@ -481,6 +498,26 @@ class _FlyScreenState extends State<FlyScreen> {
                     //     child: Text("Emergency Landing",style: ThemeConfig.textStyleWhite14,),
                     //   ),
                     // ),
+
+                    widget.isConnect == false ?
+
+
+                    InkWell(
+                      onTap: (){
+                       // startTimer();
+                        NavigationService().navigatePage(DroneFlyConnection());
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        alignment: Alignment.center,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            color: ThemeConfig.primary
+                        ),
+                        child: Text("Connect",style: ThemeConfig.textStylewhite16,),
+                      ),
+                    ) :
 
                     InkWell(
                       onTap: (){

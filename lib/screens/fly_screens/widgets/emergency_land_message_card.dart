@@ -81,57 +81,65 @@ class _EmergencyLandLoadScreenState extends State<EmergencyLandLoadScreen> {
 
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              color: Colors.white,
-              child:
-              Image.asset(
-                "assets/images/drone-flying.gif",
-                height: 175.0,
-                width: 175.0,
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        color: ThemeConfig.whiteColor,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                color: Colors.white,
+                child:
+                Image.asset(
+                  "assets/images/drone-flying.gif",
+                  height: 175.0,
+                  width: 175.0,
+                ),
+                // Image.network("https://gifimage.net/wp-content/uploads/2017/10/drone-gif-4.gif",width: 180,),
               ),
-              // Image.network("https://gifimage.net/wp-content/uploads/2017/10/drone-gif-4.gif",width: 180,),
-            ),
-            SizedBox(height: 20,),
+              SizedBox(height: 20,),
 
-            Text("Emergency Landing....",style: TextStyle(fontSize: 20,color:Theme.of(context).primaryColor),),
-            SizedBox(height: 10,),
-            Text("Your Drone was disconnected check whether its far from you",style: ThemeConfig.textStyleGrey14,),
+              Text("Emergency Landing....",style: TextStyle(fontSize: 20,color:Theme.of(context).primaryColor),),
+              SizedBox(height: 10,),
+              Text("Your Drone was disconnected check whether its far from you",style: ThemeConfig.textStyleGrey14,),
 
 
-            SizedBox(height: 10,),
+              SizedBox(height: 10,),
 
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //
-            //     Icon(Icons.access_time,color: Colors.red,size: 30,),
-            //     SizedBox(width: 10,),
-            //     // Text(
-            //     //   '$seconds',
-            //     //   style: TextStyle(
-            //     //       fontWeight: FontWeight.bold,
-            //     //       color: Colors.red,
-            //     //       fontSize: 30),
-            //     // ),
-            //     Text(
-            //       '$seconds',
-            //       style: TextStyle(
-            //           fontWeight: FontWeight.bold,
-            //           color: Colors.red,
-            //           fontSize: 30),
-            //     ),
-            //     SizedBox(height: 20),
-            //
-            //
-            //   ],
-            // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //
+              //     Icon(Icons.access_time,color: Colors.red,size: 30,),
+              //     SizedBox(width: 10,),
+              //     // Text(
+              //     //   '$seconds',
+              //     //   style: TextStyle(
+              //     //       fontWeight: FontWeight.bold,
+              //     //       color: Colors.red,
+              //     //       fontSize: 30),
+              //     // ),
+              //     Text(
+              //       '$seconds',
+              //       style: TextStyle(
+              //           fontWeight: FontWeight.bold,
+              //           color: Colors.red,
+              //           fontSize: 30),
+              //     ),
+              //     SizedBox(height: 20),
+              //
+              //
+              //   ],
+              // ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );

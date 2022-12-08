@@ -127,6 +127,19 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
     });
   }
 
+  final Set<Marker> _markers = {};
+ final Set<Polyline> _polyline = {};
+
+// list of locations to display polylines
+List<LatLng> latLen = [
+LatLng(19.0759837, 72.8776559),
+  LatLng(28.679079, 77.069710),
+  LatLng(26.850000, 80.949997),
+LatLng(24.879999, 74.629997),
+ LatLng(16.166700, 74.833298),
+  LatLng(12.971599, 77.594563),
+];
+
 
 
   @override
@@ -137,6 +150,10 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
       startTimer();
       //getLocation();
     });
+
+
+
+
   }
   @override
   void dispose() {
@@ -170,10 +187,12 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                 onMapCreated: (controller){
                   _controller.complete(controller);
                 },
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true,
+                 myLocationEnabled: true,
+                zoomGesturesEnabled: true,
+                zoomControlsEnabled: true,
+                 myLocationButtonEnabled: true,
 
-                compassEnabled: true,
+               // compassEnabled: true,
                 // markers: {
                 //   Marker(
                 //       markerId: MarkerId("1"),
@@ -234,7 +253,7 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                   children: [
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: MediaQuery.of(context).size.height*0.3,
+                      height: MediaQuery.of(context).size.height*0.25,
                       width: MediaQuery.of(context).size.width*0.4,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
@@ -247,43 +266,49 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                               spreadRadius: 2)
                         ],
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Wheat Field",style: ThemeConfig.Large14Black,),
-                              SizedBox(height: 6,),
-
-                              Row(
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Land Size  -  ",style: ThemeConfig.minimumStyleGrey,),
-                                  SizedBox(height: 4,),
-                                  Text("5 acrs",style: ThemeConfig.primary14,)
+                                  Text("Wheat Field",style: ThemeConfig.Large14Black,),
+                                  SizedBox(height: 6,),
+
+                                  Row(
+                                    children: [
+                                      Text("Land Size  -  ",style: ThemeConfig.minimumStyleGrey,),
+                                      SizedBox(height: 4,),
+                                      Text("5 acrs",style: ThemeConfig.primary14,)
+                                    ],
+                                  ),
+                                  SizedBox(height: 6,),
+
+                                  Row(
+                                    children: [
+                                      Text("Total Time  -  ",style: ThemeConfig.minimumStyleGrey,),
+                                      SizedBox(height: 4,),
+                                      Text("20 min",style: ThemeConfig.primary14,)
+                                    ],
+                                  ),
                                 ],
                               ),
-                              SizedBox(height: 6,),
+                              Container(
+                                // height: 110,
+                                // width: 90,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6),
 
-                              Row(
-                                children: [
-                                  Text("Total Time  -  ",style: ThemeConfig.minimumStyleGrey,),
-                                  SizedBox(height: 4,),
-                                  Text("20 min",style: ThemeConfig.primary14,)
-                                ],
+                                ),
+                                child: Image.asset("assets/images/wheat.png",width: 100,),
                               ),
                             ],
                           ),
-                          Container(
-                            // height: 110,
-                            // width: 90,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-
-                            ),
-                            child: Image.asset("assets/images/wheat.png",width: 100,),
-                          ),
+                          SizedBox(height: 10,),
+                          Text("Change plan is rejected during fly",style: ThemeConfig.Medium12grey,)
                         ],
                       ),
                     ),
@@ -407,7 +432,7 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                   children: [
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                      width: MediaQuery.of(context).size.width*0.75,
+                      width: MediaQuery.of(context).size.width*0.6,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
                         color: Colors.white,
@@ -467,25 +492,25 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                         ],
                       ),
                     ),
-                    // InkWell(
-                    //   onTap: (){
-                    //
-                    //     widget.isEmergency == true ? null :
-                    //     _sortbyForm();
-                    //    // startTimer();
-                    //     //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
-                    //   },
-                    //   child: Container(
-                    //     padding: EdgeInsets.symmetric(horizontal: 20),
-                    //     alignment: Alignment.center,
-                    //     height: 40,
-                    //     decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(6),
-                    //         color: widget.isEmergency == true? ThemeConfig.lightGreyColor:ThemeConfig.redColor
-                    //     ),
-                    //     child: Text("Emergency Landing",style: ThemeConfig.textStyleWhite14,),
-                    //   ),
-                    // ),
+                    InkWell(
+                      onTap: (){
+
+                        widget.isEmergency == true ? null :
+                        _sortbyForm();
+                       // startTimer();
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        alignment: Alignment.center,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            color: widget.isEmergency == true? ThemeConfig.lightGreyColor:ThemeConfig.redColor
+                        ),
+                        child: Text("Emergency Landing",style: ThemeConfig.textStylewhite16 ,),
+                      ),
+                    ),
 
                     InkWell(
                       onTap: (){
@@ -494,7 +519,7 @@ class _TakeOffScreenState extends State<TakeOffScreen> {
                         // Navigator.push(context, MaterialPageRoute(builder: (context) => LoadingScreen()));
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(horizontal: 8),
                         alignment: Alignment.center,
                         height: 40,
                         decoration: BoxDecoration(
