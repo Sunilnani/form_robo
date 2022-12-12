@@ -100,726 +100,800 @@ class _AddLandProfileState extends State<AddLandProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 4,
-        backgroundColor: ThemeConfig.whiteColor,
-        iconTheme: IconThemeData(color: ThemeConfig.primary),
-        title: Text(
-          "Land Profiles",
-          overflow: TextOverflow.visible,
-          softWrap: true,
-          style: Theme.of(context).textTheme.headline5!.copyWith(
-              fontSize: 18,
-              fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
-        
-      ),
+      backgroundColor: Colors.white,
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   elevation: 4,
+      //   backgroundColor: ThemeConfig.whiteColor,
+      //   iconTheme: IconThemeData(color: ThemeConfig.primary),
+      //   title: Text(
+      //     "Land Profiles",
+      //     overflow: TextOverflow.visible,
+      //     softWrap: true,
+      //     style: Theme.of(context).textTheme.headline5!.copyWith(
+      //         fontSize: 18,
+      //         fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
+      //
+      // ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 2),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(height: 20,),
-                Text("Enter all the fields and click on submit button",style: ThemeConfig.textStyleblackshade14,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 30),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    SizedBox(height: 50,),
+                    Text("Enter all the fields and click on submit to save",style: ThemeConfig.Medium16grey,textAlign: TextAlign.center,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(height: 20,),
-
-                        Form(
-                            key: _formKey,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-
-
-                                ProfileTextFormField(
-                                    focusColor: Colors.white,
-                                    fillColor: Colors.white,
-                                    validator: (String? value) {
-                                      if (value!.isEmpty) {
-                                        return "Please enter profile Name";
-                                      }
-                                      return null;
-                                    },
-                                    //controller: _usernameController,
-                                    title: "Profile Name     ",
-                                    suffixIcon: Icons.person),
-
-
-                                Row(
-                                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Crop Type           ",style: ThemeConfig.primary145,),
-                                    SizedBox(width: 20,),
-
-                                    Container(
-                                      height: 80,
-                                      width: MediaQuery.of(context).size.width*0.5,
-                                      child: AppDropDownSearch<String>(
-                                        focusColor: ThemeConfig.secondaryColor.withOpacity(0.5),
-                                        // title: "District",
-                                        hintText: "Select  Crop Type",
-                                        borderColor: ThemeConfig.formBorderColor,
-                                        enabled: false,
-                                        selectedItem: _cropType,
-                                        suffixIcon: Icons.keyboard_arrow_down_rounded,
-                                        color: ThemeConfig.lightBlackColor,
-                                        fillColor: ThemeConfig.whiteColor,
-
-                                        itemAsString: (String? quantityType) => quantityType??"",
-                                        asyncItems:(String? filter)  async => _cropTypeList,
-                                        onChanged: (String? quantityType) {
-
-                                          setState(() {
-                                            _cropType = quantityType;
-                                          });
-                                          print(quantityType);
-                                        },
-                                      ),
-                                    ),
-
-
-
-
-                                    // Container(
-                                    //   padding: EdgeInsets.only(left: 14, right: 14),
-                                    //   height: 40,
-                                    //   width: MediaQuery.of(context).size.width*0.5,
-                                    //   decoration: BoxDecoration(
-                                    //       shape: BoxShape.rectangle,
-                                    //       borderRadius: BorderRadius.circular(4),
-                                    //       color:  ThemeConfig.whiteColor,
-                                    //       border: Border.all(color:  ThemeConfig.bgGreyColor)
-                                    //   ),
-                                    //   child:TextField(
-                                    //     // controller: streetController,
-                                    //     style: TextStyle(
-                                    //       fontSize: 18,
-                                    //       fontWeight: FontWeight.w600,
-                                    //     ),
-                                    //     // controller: numberController,
-                                    //     cursorColor:  ThemeConfig.primary,
-                                    //     inputFormatters: <TextInputFormatter>[
-                                    //       FilteringTextInputFormatter.singleLineFormatter,
-                                    //       LengthLimitingTextInputFormatter(15)
-                                    //     ],
-                                    //     decoration: InputDecoration(
-                                    //       //hintText: "Search here",
-                                    //         hintStyle: TextStyle(
-                                    //             fontSize: 14,
-                                    //             fontWeight: FontWeight.w500,
-                                    //             color: Colors.grey[500]),
-                                    //         border: InputBorder.none),
-                                    //   ),
-                                    //
-                                    // ),
-                                  ],
-                                ),
-
-                                if(_cropType == addcrop)
-                                  ProfileTextFormField(
-                                      focusColor: Colors.white,
-                                      fillColor: Colors.white,
-                                      validator: (String? value) {
-                                        if (value!.isEmpty) {
-                                          return "Please enter Crop Name";
-                                        }
-                                        return null;
-                                      },
-                                      //controller: _usernameController,
-                                      title: "Crop Name     ",
-                                     ),
-
-
-                                ProfileTextFormField(
-                                    focusColor: Colors.white,
-                                    fillColor: Colors.white,
-                                    validator: (String? value) {
-                                      if (value!.isEmpty) {
-                                        return "Please enter Crop height";
-                                      }
-                                      return null;
-                                    },
-                                    //controller: _usernameController,
-                                    title: "Crop Height     ",
-                                    ),
-
-                                SizedBox(height: 20,),
-
-                                Row(
-                                  children: [
-                                    Text("Spraying Speed     ",style: ThemeConfig.primary145,),
-                                    SizedBox(width: 20,),
-
-
-                                    Container(
-                                      height: MediaQuery.of(context).size.height*0.1,
-                                      width: MediaQuery.of(context).size.width*0.45,
-                                      child: ListView.separated(
-                                        //shrinkWrap: true,
-                                        itemCount: sprayingSpeed.length,
-                                        physics: BouncingScrollPhysics(),
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-
-                                          // orderId = notifications!.orders![index].id;
-
-                                          return InkWell(
-                                            onTap: (){
-
-                                              setState(() {
-                                                // isSelected = !isSelected;
-                                                _selectedIndex = index;
-                                                selected_name=sprayingSpeed[index];
-                                                print("---------------------------> index ${_selectedIndex}");
-
-                                              });
-
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  alignment: Alignment.center,
-                                                  decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                                                    context,
-                                                    radius: 4,
-                                                    color: _selectedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
-                                                  height: 40,
-                                                  width: 100,
-                                                  child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                                                ),
-                                              ],
-                                            ),
-
-                                          );
-                                        },
-                                        separatorBuilder: (BuildContext context, int index) {
-                                          return const SizedBox(height: 0);
-                                        },
-                                      ),
-                                    ),
-
-
-
-                                  ],
-                                ),
-
-                                SizedBox(height: 20,),
-
-                                _selectedIndex == 1 ?
-
-                                Row(
-                                  children: [
-
-                                    Text("Speed Type           ",style: ThemeConfig.primary145,),
-                                    SizedBox(width: 20,),
-
-
-                                    Container(
-                                      height: MediaQuery.of(context).size.height*0.1,
-                                      width: MediaQuery.of(context).size.width*0.45,
-                                      child: ListView.separated(
-                                        //shrinkWrap: true,
-                                        itemCount: _speedType.length,
-                                        physics: BouncingScrollPhysics(),
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-
-                                          // orderId = notifications!.orders![index].id;
-
-                                          return InkWell(
-                                            onTap: (){
-
-                                              setState(() {
-                                                // isSelected = !isSelected;
-                                                _selectedSpeedIndex = index;
-                                                _selectedSpeed=_speedType[index];
-                                                print("---------------------------> index ${_selectedSpeedIndex}");
-
-                                              });
-
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  alignment: Alignment.center,
-                                                  decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                                                    context,
-                                                    radius: 4,
-                                                    color: _selectedSpeedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
-                                                  height: 40,
-                                                  width: 100,
-                                                  child: Text("${_speedType[index]}",style: _selectedSpeedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                                                ),
-                                              ],
-                                            ),
-
-                                          );
-                                        },
-                                        separatorBuilder: (BuildContext context, int index) {
-                                          return const SizedBox(height: 0);
-                                        },
-                                      ),
-                                    ),
-
-
-
-                                  ],
-                                ):SizedBox()
-                                ,
-
-                                SizedBox(height: 20,),
-
-                                Row(
-                                  children: [
-                                    Text("Map Type              ",style: ThemeConfig.primary145,),
-                                    SizedBox(width: 20,),
-
-
-                                    Container(
-                                      height: MediaQuery.of(context).size.height*0.1,
-                                      width: MediaQuery.of(context).size.width*0.45,
-                                      child: ListView.separated(
-                                        //shrinkWrap: true,
-                                        itemCount: mapType.length,
-                                        physics: BouncingScrollPhysics(),
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-
-                                          // orderId = notifications!.orders![index].id;
-
-                                          return InkWell(
-                                            onTap: (){
-
-                                              setState(() {
-                                                // isSelected = !isSelected;
-                                                _selectedmapIndex = index;
-                                                selected_map=mapType[index];
-                                                print("---------------------------> index ${_selectedmapIndex}");
-
-                                              });
-
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  alignment: Alignment.center,
-                                                  decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                                                    context,
-                                                    radius: 4,
-                                                    color: _selectedmapIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
-                                                  height: 40,
-                                                  width: 100,
-                                                  child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                                                )
-                                              ],
-                                            ),
-
-                                          );
-                                        },
-                                        separatorBuilder: (BuildContext context, int index) {
-                                          return const SizedBox(height: 0);
-                                        },
-                                      ),
-                                    ),
-
-
-
-                                  ],
-                                ),
-
-                              ],
-                            )),
-
-
-
-
-
-
-                        // Row(
-                        //   children: [
-                        //     Text("Spraying Speed     ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
-                        //     SizedBox(width: 20,),
-                        //
-                        //
-                        //     Container(
-                        //       height: MediaQuery.of(context).size.height*0.1,
-                        //       width: MediaQuery.of(context).size.width*0.45,
-                        //       child: ListView.separated(
-                        //         //shrinkWrap: true,
-                        //         itemCount: sprayingSpeed.length,
-                        //         physics: BouncingScrollPhysics(),
-                        //         scrollDirection: Axis.horizontal,
-                        //         itemBuilder: (context, index) {
-                        //
-                        //           // orderId = notifications!.orders![index].id;
-                        //
-                        //           return InkWell(
-                        //             onTap: (){
-                        //
-                        //               setState(() {
-                        //                 // isSelected = !isSelected;
-                        //                 _selectedIndex = index;
-                        //                 selected_name=sprayingSpeed[index];
-                        //                 print("---------------------------> index ${_selectedIndex}");
-                        //
-                        //               });
-                        //
-                        //             },
-                        //             child: Row(
-                        //               children: [
-                        //                 Container(
-                        //                   alignment: Alignment.center,
-                        //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                        //                     context,
-                        //                     radius: 4,
-                        //                     color: _selectedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
-                        //                   height: 40,
-                        //                   width: 100,
-                        //                   child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                        //                 ),
-                        //               ],
-                        //             ),
-                        //
-                        //           );
-                        //         },
-                        //         separatorBuilder: (BuildContext context, int index) {
-                        //           return const SizedBox(height: 0);
-                        //         },
-                        //       ),
-                        //     ),
-                        //
-                        //
-                        //
-                        //   ],
-                        // ),
-                        //
-                        // SizedBox(height: 20,),
-                        //
-                        // _selectedIndex == 1 ?
-                        //
-                        // Row(
-                        //   children: [
-                        //
-                        //     Text("Speed Type            ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
-                        //     SizedBox(width: 20,),
-                        //
-                        //
-                        //     Container(
-                        //       height: MediaQuery.of(context).size.height*0.1,
-                        //       width: MediaQuery.of(context).size.width*0.45,
-                        //       child: ListView.separated(
-                        //         //shrinkWrap: true,
-                        //         itemCount: _speedType.length,
-                        //         physics: BouncingScrollPhysics(),
-                        //         scrollDirection: Axis.horizontal,
-                        //         itemBuilder: (context, index) {
-                        //
-                        //           // orderId = notifications!.orders![index].id;
-                        //
-                        //           return InkWell(
-                        //             onTap: (){
-                        //
-                        //               setState(() {
-                        //                 // isSelected = !isSelected;
-                        //                 _selectedSpeedIndex = index;
-                        //                 _selectedSpeed=_speedType[index];
-                        //                 print("---------------------------> index ${_selectedSpeedIndex}");
-                        //
-                        //               });
-                        //
-                        //             },
-                        //             child: Row(
-                        //               children: [
-                        //                 Container(
-                        //                   alignment: Alignment.center,
-                        //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                        //                     context,
-                        //                     radius: 4,
-                        //                     color: _selectedSpeedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
-                        //                   height: 40,
-                        //                   width: 100,
-                        //                   child: Text("${_speedType[index]}",style: _selectedSpeedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                        //                 ),
-                        //               ],
-                        //             ),
-                        //
-                        //           );
-                        //         },
-                        //         separatorBuilder: (BuildContext context, int index) {
-                        //           return const SizedBox(height: 0);
-                        //         },
-                        //       ),
-                        //     ),
-                        //
-                        //
-                        //
-                        //   ],
-                        // ):SizedBox()
-                        // ,
-                        //
-                        // SizedBox(height: 20,),
-                        //
-                        // Row(
-                        //   children: [
-                        //     Text("Map Type               ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
-                        //     SizedBox(width: 20,),
-                        //
-                        //
-                        //     Container(
-                        //       height: MediaQuery.of(context).size.height*0.1,
-                        //       width: MediaQuery.of(context).size.width*0.45,
-                        //       child: ListView.separated(
-                        //         //shrinkWrap: true,
-                        //         itemCount: mapType.length,
-                        //         physics: BouncingScrollPhysics(),
-                        //         scrollDirection: Axis.horizontal,
-                        //         itemBuilder: (context, index) {
-                        //
-                        //           // orderId = notifications!.orders![index].id;
-                        //
-                        //           return InkWell(
-                        //             onTap: (){
-                        //
-                        //               setState(() {
-                        //                 // isSelected = !isSelected;
-                        //                 _selectedmapIndex = index;
-                        //                 selected_map=mapType[index];
-                        //                 print("---------------------------> index ${_selectedmapIndex}");
-                        //
-                        //               });
-                        //
-                        //             },
-                        //             child: Row(
-                        //               children: [
-                        //                 Container(
-                        //                   alignment: Alignment.center,
-                        //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                        //                     context,
-                        //                     radius: 4,
-                        //                     color: _selectedmapIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
-                        //                   height: 40,
-                        //                   width: 100,
-                        //                   child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                        //                 )
-                        //               ],
-                        //             ),
-                        //
-                        //           );
-                        //         },
-                        //         separatorBuilder: (BuildContext context, int index) {
-                        //           return const SizedBox(height: 0);
-                        //         },
-                        //       ),
-                        //     ),
-                        //
-                        //
-                        //
-                        //   ],
-                        // ),
-
-
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(height: 30,),
-                        insidePic == null?
-                        Text("Upload Image",style: TextStyle(color: Colors.red,fontSize: 16,fontWeight: FontWeight.w600),): Text(""),
-                        SizedBox(height: 10,),
-                        insidePic == null
-                            ?
-                        InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  builder: (builder) => uploadPicBottomSheet());
-                            },
-                            child: Center(
-                              child: Container(
-                                height: 120,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    // color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Image.asset(
-                                  "assets/images/up.png",
-                                  width: 150,
-                                  color: Colors.grey[600],
-                                ),
-
-                              ),
-                            ))
-
-                            : Column(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Upload Completed",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                ),
-                                SizedBox(width: 10,),
-                                Container(
-                                  height: 20,
-                                  width: 20,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.check,
-                                      color: Colors.white,
-                                      size: 15,
+                            SizedBox(height: 20,),
+
+                            Form(
+                                key: _formKey,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+
+                                    ProfileTextFormField(
+                                        focusColor: Colors.white,
+                                        fillColor: Colors.white,
+                                        validator: (String? value) {
+                                          if (value!.isEmpty) {
+                                            return "Please enter profile Name";
+                                          }
+                                          return null;
+                                        },
+                                        //controller: _usernameController,
+                                        title: "Profile Name              ",
+                                        suffixIcon: Icons.person),
+
+
+                                    Row(
+                                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("Crop Type                    ",style: ThemeConfig.primary145black,),
+                                        SizedBox(width: 20,),
+
+                                        Container(
+                                          height: 80,
+                                          width: MediaQuery.of(context).size.width*0.45,
+                                          child: AppDropDownSearch<String>(
+                                            focusColor: ThemeConfig.secondaryColor.withOpacity(0.5),
+                                            // title: "District",
+                                            hintText: "Select  Crop Type",
+                                            borderColor: ThemeConfig.formBorderColor,
+                                            enabled: false,
+                                            selectedItem: _cropType,
+                                            suffixIcon: Icons.keyboard_arrow_down,
+                                            color: ThemeConfig.lightBlackColor,
+                                            fillColor: ThemeConfig.whiteColor,
+
+                                            itemAsString: (String? quantityType) => quantityType??"",
+                                            asyncItems:(String? filter)  async => _cropTypeList,
+                                            onChanged: (String? quantityType) {
+
+                                              setState(() {
+                                                _cropType = quantityType;
+                                              });
+                                              print(quantityType);
+                                            },
+                                          ),
+                                        ),
+
+
+
+
+                                        // Container(
+                                        //   padding: EdgeInsets.only(left: 14, right: 14),
+                                        //   height: 40,
+                                        //   width: MediaQuery.of(context).size.width*0.5,
+                                        //   decoration: BoxDecoration(
+                                        //       shape: BoxShape.rectangle,
+                                        //       borderRadius: BorderRadius.circular(4),
+                                        //       color:  ThemeConfig.whiteColor,
+                                        //       border: Border.all(color:  ThemeConfig.bgGreyColor)
+                                        //   ),
+                                        //   child:TextField(
+                                        //     // controller: streetController,
+                                        //     style: TextStyle(
+                                        //       fontSize: 18,
+                                        //       fontWeight: FontWeight.w600,
+                                        //     ),
+                                        //     // controller: numberController,
+                                        //     cursorColor:  ThemeConfig.primary,
+                                        //     inputFormatters: <TextInputFormatter>[
+                                        //       FilteringTextInputFormatter.singleLineFormatter,
+                                        //       LengthLimitingTextInputFormatter(15)
+                                        //     ],
+                                        //     decoration: InputDecoration(
+                                        //       //hintText: "Search here",
+                                        //         hintStyle: TextStyle(
+                                        //             fontSize: 14,
+                                        //             fontWeight: FontWeight.w500,
+                                        //             color: Colors.grey[500]),
+                                        //         border: InputBorder.none),
+                                        //   ),
+                                        //
+                                        // ),
+                                      ],
                                     ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              height: 120,
-                              width: 120,
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Image.file(
-                                    insidePic!,
-                                    fit: BoxFit.cover,
-                                  )),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Any Issue, upload again ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                ),
-                                GestureDetector(
+
+                                    if(_cropType == addcrop)
+                                      ProfileTextFormField(
+                                          focusColor: Colors.white,
+                                          fillColor: Colors.white,
+                                          validator: (String? value) {
+                                            if (value!.isEmpty) {
+                                              return "Please enter Crop Name";
+                                            }
+                                            return null;
+                                          },
+                                          //controller: _usernameController,
+                                          title: "Crop Name                  ",
+                                         ),
+
+
+                                    ProfileTextFormField(
+                                        focusColor: Colors.white,
+                                        fillColor: Colors.white,
+                                        validator: (String? value) {
+                                          if (value!.isEmpty) {
+                                            return "Please enter Crop height";
+                                          }
+                                          return null;
+                                        },
+                                        //controller: _usernameController,
+                                        title: "Crop Height (In feets)",
+                                        ),
+
+                                    SizedBox(height: 20,),
+
+                                    Row(
+                                      children: [
+                                        Text("Spraying Speed          ",style: ThemeConfig.primary145black,),
+                                        SizedBox(width: 20,),
+
+
+                                        Container(
+                                          height: MediaQuery.of(context).size.height*0.1,
+                                          width: MediaQuery.of(context).size.width*0.45,
+                                          child: ListView.separated(
+                                            //shrinkWrap: true,
+                                            itemCount: sprayingSpeed.length,
+                                            physics: BouncingScrollPhysics(),
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+
+                                              // orderId = notifications!.orders![index].id;
+
+                                              return InkWell(
+                                                onTap: (){
+
+                                                  setState(() {
+                                                    // isSelected = !isSelected;
+                                                    _selectedIndex = index;
+                                                    selected_name=sprayingSpeed[index];
+                                                    print("---------------------------> index ${_selectedIndex}");
+
+                                                  });
+
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      alignment: Alignment.center,
+                                                      decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                                                        context,
+                                                        radius: 4,
+                                                        color: _selectedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                                                      height: 40,
+                                                      width: 100,
+                                                      child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                                                    ),
+                                                  ],
+                                                ),
+
+                                              );
+                                            },
+                                            separatorBuilder: (BuildContext context, int index) {
+                                              return const SizedBox(height: 0);
+                                            },
+                                          ),
+                                        ),
+
+
+
+                                      ],
+                                    ),
+
+                                    SizedBox(height: 20,),
+
+                                    _selectedIndex == 1 ?
+
+                                    Row(
+                                      children: [
+
+                                        Text("Speed Type                 ",style: ThemeConfig.primary145black,),
+                                        SizedBox(width: 20,),
+
+
+                                        Container(
+                                          height: MediaQuery.of(context).size.height*0.1,
+                                          width: MediaQuery.of(context).size.width*0.45,
+                                          child: ListView.separated(
+                                            //shrinkWrap: true,
+                                            itemCount: _speedType.length,
+                                            physics: BouncingScrollPhysics(),
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+
+                                              // orderId = notifications!.orders![index].id;
+
+                                              return InkWell(
+                                                onTap: (){
+
+                                                  setState(() {
+                                                    // isSelected = !isSelected;
+                                                    _selectedSpeedIndex = index;
+                                                    _selectedSpeed=_speedType[index];
+                                                    print("---------------------------> index ${_selectedSpeedIndex}");
+
+                                                  });
+
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      alignment: Alignment.center,
+                                                      decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                                                        context,
+                                                        radius: 4,
+                                                        color: _selectedSpeedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                                                      height: 40,
+                                                      width: 100,
+                                                      child: Text("${_speedType[index]}",style: _selectedSpeedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                                                    ),
+                                                  ],
+                                                ),
+
+                                              );
+                                            },
+                                            separatorBuilder: (BuildContext context, int index) {
+                                              return const SizedBox(height: 0);
+                                            },
+                                          ),
+                                        ),
+
+
+
+                                      ],
+                                    ):SizedBox()
+                                    ,
+
+                                    SizedBox(height: 20,),
+
+                                    Row(
+                                      children: [
+                                        Text("Map Type                    ",style: ThemeConfig.primary145,),
+                                        SizedBox(width: 20,),
+
+
+                                        Container(
+                                          height: MediaQuery.of(context).size.height*0.1,
+                                          width: MediaQuery.of(context).size.width*0.45,
+                                          child: ListView.separated(
+                                            //shrinkWrap: true,
+                                            itemCount: mapType.length,
+                                            physics: BouncingScrollPhysics(),
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+
+                                              // orderId = notifications!.orders![index].id;
+
+                                              return InkWell(
+                                                onTap: (){
+
+                                                  setState(() {
+                                                    // isSelected = !isSelected;
+                                                    _selectedmapIndex = index;
+                                                    selected_map=mapType[index];
+                                                    print("---------------------------> index ${_selectedmapIndex}");
+
+                                                  });
+
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      alignment: Alignment.center,
+                                                      decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                                                        context,
+                                                        radius: 4,
+                                                        color: _selectedmapIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                                                      height: 40,
+                                                      width: 100,
+                                                      child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                                                    )
+                                                  ],
+                                                ),
+
+                                              );
+                                            },
+                                            separatorBuilder: (BuildContext context, int index) {
+                                              return const SizedBox(height: 0);
+                                            },
+                                          ),
+                                        ),
+
+
+
+                                      ],
+                                    ),
+
+                                  ],
+                                )),
+
+
+
+
+
+
+                            // Row(
+                            //   children: [
+                            //     Text("Spraying Speed     ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
+                            //     SizedBox(width: 20,),
+                            //
+                            //
+                            //     Container(
+                            //       height: MediaQuery.of(context).size.height*0.1,
+                            //       width: MediaQuery.of(context).size.width*0.45,
+                            //       child: ListView.separated(
+                            //         //shrinkWrap: true,
+                            //         itemCount: sprayingSpeed.length,
+                            //         physics: BouncingScrollPhysics(),
+                            //         scrollDirection: Axis.horizontal,
+                            //         itemBuilder: (context, index) {
+                            //
+                            //           // orderId = notifications!.orders![index].id;
+                            //
+                            //           return InkWell(
+                            //             onTap: (){
+                            //
+                            //               setState(() {
+                            //                 // isSelected = !isSelected;
+                            //                 _selectedIndex = index;
+                            //                 selected_name=sprayingSpeed[index];
+                            //                 print("---------------------------> index ${_selectedIndex}");
+                            //
+                            //               });
+                            //
+                            //             },
+                            //             child: Row(
+                            //               children: [
+                            //                 Container(
+                            //                   alignment: Alignment.center,
+                            //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                            //                     context,
+                            //                     radius: 4,
+                            //                     color: _selectedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                            //                   height: 40,
+                            //                   width: 100,
+                            //                   child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //
+                            //           );
+                            //         },
+                            //         separatorBuilder: (BuildContext context, int index) {
+                            //           return const SizedBox(height: 0);
+                            //         },
+                            //       ),
+                            //     ),
+                            //
+                            //
+                            //
+                            //   ],
+                            // ),
+                            //
+                            // SizedBox(height: 20,),
+                            //
+                            // _selectedIndex == 1 ?
+                            //
+                            // Row(
+                            //   children: [
+                            //
+                            //     Text("Speed Type            ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
+                            //     SizedBox(width: 20,),
+                            //
+                            //
+                            //     Container(
+                            //       height: MediaQuery.of(context).size.height*0.1,
+                            //       width: MediaQuery.of(context).size.width*0.45,
+                            //       child: ListView.separated(
+                            //         //shrinkWrap: true,
+                            //         itemCount: _speedType.length,
+                            //         physics: BouncingScrollPhysics(),
+                            //         scrollDirection: Axis.horizontal,
+                            //         itemBuilder: (context, index) {
+                            //
+                            //           // orderId = notifications!.orders![index].id;
+                            //
+                            //           return InkWell(
+                            //             onTap: (){
+                            //
+                            //               setState(() {
+                            //                 // isSelected = !isSelected;
+                            //                 _selectedSpeedIndex = index;
+                            //                 _selectedSpeed=_speedType[index];
+                            //                 print("---------------------------> index ${_selectedSpeedIndex}");
+                            //
+                            //               });
+                            //
+                            //             },
+                            //             child: Row(
+                            //               children: [
+                            //                 Container(
+                            //                   alignment: Alignment.center,
+                            //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                            //                     context,
+                            //                     radius: 4,
+                            //                     color: _selectedSpeedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                            //                   height: 40,
+                            //                   width: 100,
+                            //                   child: Text("${_speedType[index]}",style: _selectedSpeedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //
+                            //           );
+                            //         },
+                            //         separatorBuilder: (BuildContext context, int index) {
+                            //           return const SizedBox(height: 0);
+                            //         },
+                            //       ),
+                            //     ),
+                            //
+                            //
+                            //
+                            //   ],
+                            // ):SizedBox()
+                            // ,
+                            //
+                            // SizedBox(height: 20,),
+                            //
+                            // Row(
+                            //   children: [
+                            //     Text("Map Type               ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
+                            //     SizedBox(width: 20,),
+                            //
+                            //
+                            //     Container(
+                            //       height: MediaQuery.of(context).size.height*0.1,
+                            //       width: MediaQuery.of(context).size.width*0.45,
+                            //       child: ListView.separated(
+                            //         //shrinkWrap: true,
+                            //         itemCount: mapType.length,
+                            //         physics: BouncingScrollPhysics(),
+                            //         scrollDirection: Axis.horizontal,
+                            //         itemBuilder: (context, index) {
+                            //
+                            //           // orderId = notifications!.orders![index].id;
+                            //
+                            //           return InkWell(
+                            //             onTap: (){
+                            //
+                            //               setState(() {
+                            //                 // isSelected = !isSelected;
+                            //                 _selectedmapIndex = index;
+                            //                 selected_map=mapType[index];
+                            //                 print("---------------------------> index ${_selectedmapIndex}");
+                            //
+                            //               });
+                            //
+                            //             },
+                            //             child: Row(
+                            //               children: [
+                            //                 Container(
+                            //                   alignment: Alignment.center,
+                            //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
+                            //                     context,
+                            //                     radius: 4,
+                            //                     color: _selectedmapIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                            //                   height: 40,
+                            //                   width: 100,
+                            //                   child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+                            //                 )
+                            //               ],
+                            //             ),
+                            //
+                            //           );
+                            //         },
+                            //         separatorBuilder: (BuildContext context, int index) {
+                            //           return const SizedBox(height: 0);
+                            //         },
+                            //       ),
+                            //     ),
+                            //
+                            //
+                            //
+                            //   ],
+                            // ),
+
+
+                          ],
+                        ),
+                        Container(
+                          width: 220,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 30,),
+                              insidePic == null?
+                              Text("Upload Image",style: TextStyle(color: Colors.red,fontSize: 16,fontWeight: FontWeight.w600),): Text(""),
+                              SizedBox(height: 10,),
+                              insidePic == null
+                                  ?
+                              InkWell(
                                   onTap: () {
                                     showModalBottomSheet(
                                         context: context,
-                                        builder: (builder) =>
-                                            uploadPicBottomSheet());
+                                        builder: (builder) => uploadPicBottomSheet());
                                   },
-                                  child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10)),
-                                    child: Image.asset(
-                                      "assets/images/up.png",
+                                  child: Center(
+                                    child: Container(
+                                      height: 120,
+                                      width: 150,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.grey),
+                                          // color: Colors.white,
+                                         // borderRadius: BorderRadius.circular(10)
+                                        shape: BoxShape.circle
+                                      ),
+                                      child: Image.asset(
+                                        "assets/images/up.png",
+                                        width: 150,
+                                        color: Colors.grey[600],
+                                      ),
+
                                     ),
+                                  ))
+
+                                  : Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Upload Completed",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: Colors.black),
+                                      ),
+                                      SizedBox(width: 4,),
+                                      Container(
+                                        height: 20,
+                                        width: 20,
+                                        decoration: BoxDecoration(
+                                          //borderRadius: BorderRadius.circular(5),
+                                          shape: BoxShape.circle,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    height: 120,
+                                    width: 120,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(60),
+
+                                        child: Image.file(
+                                          insidePic!,
+                                          fit: BoxFit.cover,
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Any Issue, upload again ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            color: Colors.black),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                              context: context,
+                                              builder: (builder) =>
+                                                  uploadPicBottomSheet());
+                                        },
+                                        child: Container(
+                                          height: 50,
+                                          width: 50,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(10)),
+                                          child: Image.asset(
+                                            "assets/images/up.png",
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10,),
+
+                              Container(
+                                width: 210,
+                                  height: 100,
+                                  child: Text("Note: Best Resolution 100px*100px, image should not exceed more than 2Mb",style: ThemeConfig.Medium12grey,))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+
+                    SizedBox(height: 20,),
+                    Text("Map View",style: TextStyle(color: Colors.red,fontSize: 16,fontWeight: FontWeight.w600),),
+                    SizedBox(height: 20,),
+
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: InkWell(
+                        onTap: (){
+                          NavigationService().navigatePage(MapInstructionScreen());
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          // padding: EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius:  10,
+                                  spreadRadius: 2)
+                            ],
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage("assets/images/basemap.png",),
+                            ),
+
+                          ),
+                          height: 250,
+                          width: double.infinity,
+                          child: Text("Click here to add parameters"),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: (){
+                            //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 40),
+                            alignment: Alignment.center,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(color: ThemeConfig.primary)
+                            ),
+                            child: Text("Cancel",style: ThemeConfig.textStylePrimary16,),
+                          ),
+                        ),
+                        SizedBox(width: 60,),
+                        InkWell(
+                          onTap: (){
+                            _addNewPatrameter();
+                           // Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 40),
+                            alignment: Alignment.center,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                color: ThemeConfig.primary
+                            ),
+                            child: Text("Submit",style: ThemeConfig.textStylewhite16,),
+                          ),
+                        )
+                      ],
+                    ),
+
+                    SizedBox(height: 20,),
+
+
+
+                  ],
+                ),
+              ),
+            ),
+
+            Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child:Container(
+                  padding: EdgeInsets.symmetric(horizontal: 14,vertical: 0),
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius:  10,
+                          spreadRadius: 2)
+                    ],
+
+
+                  ),
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: (){
+                               NavigationService().pop();
+                             // NavigationService().navigatePage(HomePage(),replace: true);
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.arrow_back_ios_outlined,size: 18,),
+                                SizedBox(width: 4,),
+                                Text("Back"),
+
+
                               ],
                             ),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                          ),
 
-                SizedBox(height: 20,),
-                Text("Map View",style: TextStyle(color: Colors.red,fontSize: 16,fontWeight: FontWeight.w600),),
-                SizedBox(height: 20,),
-                
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: InkWell(
-                    onTap: (){
-                      NavigationService().navigatePage(MapInstructionScreen());
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      // padding: EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius:  10,
-                              spreadRadius: 2)
+
                         ],
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage("assets/images/basemap.png",),
-                        ),
-
                       ),
-                      height: 250,
-                      width: double.infinity,
-                      child: Text("Click here to add parameters"),
-                    ),
+                      Text(
+                        "Add New Profile",
+                        overflow: TextOverflow.visible,
+                        softWrap: true,
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
+                      Container()
+                    ],
                   ),
-                ),
-                SizedBox(height: 20,),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        alignment: Alignment.center,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: ThemeConfig.primary)
-                        ),
-                        child: Text("Cancel",style: ThemeConfig.textStylePrimary16,),
-                      ),
-                    ),
-                    SizedBox(width: 60,),
-                    InkWell(
-                      onTap: (){
-                        _addNewPatrameter();
-                       // Navigator.push(context, MaterialPageRoute(builder: (context) => LandProfiles()));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        alignment: Alignment.center,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            color: ThemeConfig.primary
-                        ),
-                        child: Text("Submit",style: ThemeConfig.textStylewhite16,),
-                      ),
-                    )
-                  ],
-                ),
-
-                SizedBox(height: 20,),
-
-
-
-              ],
+                )
             ),
-          ),
+          ],
         ),
       ),
     );

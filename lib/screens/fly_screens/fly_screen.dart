@@ -181,12 +181,17 @@ class _FlyScreenState extends State<FlyScreen> {
                 //       icon:markerbitmap
                 //   )
                 // },
+                zoomControlsEnabled: true,
                 polygons: {
                   Polygon(
                       polygonId: PolygonId("1"),
                       points: polygonsPoints,
-                      fillColor: Color(0xFF006491).withOpacity(0.2),
-                      strokeWidth: 2
+                      // fillColor: Color(0xFF006491).withOpacity(0.2),
+                      // strokeWidth: 2
+                      fillColor: Colors.redAccent.withOpacity(0.1),
+                      // fillColor: Color(0xFF006491).withOpacity(0.2),
+                      strokeWidth: 2,
+                      strokeColor: Colors.red
                   ),
                }
             ),
@@ -235,7 +240,7 @@ class _FlyScreenState extends State<FlyScreen> {
                     Container(
                       padding: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height*0.25,
-                      width: MediaQuery.of(context).size.width*0.4,
+                      width: MediaQuery.of(context).size.width*0.36,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
                         color: Colors.white,
@@ -261,7 +266,7 @@ class _FlyScreenState extends State<FlyScreen> {
                                 children: [
                                   Text("Land Size  -  ",style: ThemeConfig.minimumStyleGrey,),
                                   SizedBox(height: 4,),
-                                  Text("5 acrs",style: ThemeConfig.primary14,)
+                                  Text("5 acrs",style: ThemeConfig.red14,)
                                 ],
                               ),
                               SizedBox(height: 6,),
@@ -270,7 +275,7 @@ class _FlyScreenState extends State<FlyScreen> {
                                 children: [
                                   Text("Total Time  -  ",style: ThemeConfig.minimumStyleGrey,),
                                   SizedBox(height: 4,),
-                                  Text("20 min",style: ThemeConfig.primary14,)
+                                  Text("20 min",style: ThemeConfig.red14,)
                                 ],
                               ),
                               SizedBox(height: 10,),
@@ -282,7 +287,7 @@ class _FlyScreenState extends State<FlyScreen> {
                                   children: [
                                     Icon(FontAwesomeIcons.handPointer,size: 12,color: Colors.grey,),
                                     SizedBox(width: 4,),
-                                    Text("Click here to change the plan",style: ThemeConfig.Medium12grey,)
+                                    Text("Tap here to change the plan",style: ThemeConfig.Medium12grey,)
                                   ],
                                 ),
                               )
@@ -304,7 +309,7 @@ class _FlyScreenState extends State<FlyScreen> {
                     Container(
                       padding: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height*0.2,
-                      width: MediaQuery.of(context).size.width*0.4,
+                      width: MediaQuery.of(context).size.width*0.36,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
                         color: Colors.white,
@@ -456,16 +461,27 @@ class _FlyScreenState extends State<FlyScreen> {
                           Column(
                             children: [
                               Text("Distance",style: ThemeConfig.minimumStyleGrey,),
-                              SizedBox(height: 4,),
-                              Text("280 M",style: ThemeConfig.primary14,)
+                              // SizedBox(height: 4,),
+                              Row(
+                                children: [
+
+                                  Image.asset("assets/images/distance.png",width: 34,),
+                                  Text("280 M",style: ThemeConfig.primary14,)
+                                ],
+                              )
                             ],
                           ),
                           ThemeConfig.divider,
                           Column(
                             children: [
                               Text("Fuel Level",style: ThemeConfig.minimumStyleGrey,),
-                              SizedBox(height: 4,),
-                              Text("50 %",style: ThemeConfig.primary14,)
+                              // SizedBox(height: 4,),
+                              Row(
+                                children: [
+                                  Image.asset("assets/images/fuel.png",width: 34,),
+                                  Text("50 %",style: ThemeConfig.primary14,)
+                                ],
+                              )
                             ],
                           ),
                           ThemeConfig.divider,
@@ -606,7 +622,7 @@ class SignalParametersCard extends StatelessWidget {
           },
           child: Row(
             children: [
-              Icon(Icons.arrow_back,size: 24,),
+              Icon(Icons.arrow_back_ios_outlined,size: 18,),
               SizedBox(width: 4,),
               Text("Back")
             ],
@@ -696,11 +712,12 @@ class SignalParametersCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Transmitter Signal",style: ThemeConfig.minimumStyleGrey12,),
-                SizedBox(height: 4,),
+                // SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.robot,color: Theme.of(context).primaryColor,size: 16,),
-                    SizedBox(width: 10,),
+                    Image.asset("assets/images/transmitter_signal.png",color: Theme.of(context).primaryColor,width: 34,),
+                    // Icon(FontAwesomeIcons.robot,color: Theme.of(context).primaryColor,size: 16,),
+                    // SizedBox(width: 10,),
                     Icon(FontAwesomeIcons.signal,color: Theme.of(context).primaryColor,size: 12,),
 
                   ],
@@ -709,7 +726,7 @@ class SignalParametersCard extends StatelessWidget {
             ),
             SizedBox(width: 8,),
             Container(
-              height: 30,
+              height: 40,
               width: 2,
               color: Colors.grey.shade300,
             ),
@@ -720,11 +737,12 @@ class SignalParametersCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Telemetry Signal",style: ThemeConfig.minimumStyleGrey12,),
-                SizedBox(height: 4,),
+               // SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.dragon,color: Theme.of(context).primaryColor,size: 16,),
-                    SizedBox(width: 10,),
+                    // Icon(FontAwesomeIcons.dragon,color: Theme.of(context).primaryColor,size: 16,),
+                    // SizedBox(width: 10,),
+                    Image.asset("assets/images/telemetry.png",color: Theme.of(context).primaryColor,width:48,),
                     Icon(FontAwesomeIcons.signal,color: Theme.of(context).primaryColor,size: 12,),
 
                   ],
@@ -734,7 +752,7 @@ class SignalParametersCard extends StatelessWidget {
 
             SizedBox(width: 8,),
             Container(
-              height: 30,
+              height: 40,
               width: 2,
               color: Colors.grey.shade300,
             ),
@@ -744,11 +762,12 @@ class SignalParametersCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Transmitter Battery",style: ThemeConfig.minimumStyleGrey12,),
-                SizedBox(height: 4,),
+               // SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.batteryHalf,color: Theme.of(context).primaryColor,size: 14,),
-                    SizedBox(width: 10,),
+                    // Icon(FontAwesomeIcons.batteryHalf,color: Theme.of(context).primaryColor,size: 14,),
+                    // SizedBox(width: 10,),
+                    Image.asset("assets/images/battery.png",color: Theme.of(context).primaryColor,width: 34,),
                     Text("89 %",style: ThemeConfig.Medium14grey,)
                   ],
                 )
@@ -757,7 +776,7 @@ class SignalParametersCard extends StatelessWidget {
 
             SizedBox(width: 8,),
             Container(
-              height: 30,
+              height: 40,
               width: 2,
               color: Colors.grey.shade300,
             ),
@@ -767,11 +786,12 @@ class SignalParametersCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Brightness",style: ThemeConfig.minimumStyleGrey12,),
-                SizedBox(height: 4,),
+               // SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.solidSun,color: Colors.grey,size: 14,),
-                    SizedBox(width: 10,),
+                    // Icon(FontAwesomeIcons.solidSun,color: Colors.grey,size: 14,),
+                    // SizedBox(width: 10,),
+                    Image.asset("assets/images/brightness.png",color: Theme.of(context).primaryColor,width: 34,),
                     Text("89 %",style: ThemeConfig.Medium14grey,)
                   ],
                 )
@@ -780,14 +800,29 @@ class SignalParametersCard extends StatelessWidget {
 
             SizedBox(width: 8,),
             Container(
-              height: 30,
+              height: 40,
               width: 2,
               color: Colors.grey.shade300,
             ),
             SizedBox(width: 8,),
 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  height: 40,
+                    width: 60,
+                    child: Text("Calibration Settings",style: ThemeConfig.minimumStyleGrey12,)),
+                 SizedBox(width: 2,),
+                Image.asset("assets/images/calibration.png",width: 26,),
+                // SizedBox(height: 4,),
 
-            Icon(Icons.settings,color: Theme.of(context).primaryColor,size: 20,)
+              ],
+            ),
+
+
+          //  Icon(Icons.settings,color: Theme.of(context).primaryColor,size: 20,)
 
 
           ],

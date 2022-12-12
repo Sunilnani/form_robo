@@ -4,9 +4,10 @@ import 'package:form_robo/components/theme_config.dart';
 
 
 class AppTextFormField extends StatelessWidget {
-  final String ?title;
-  final String ?hintText;
+  final String? title;
+  final String? hintText;
   final IconData? suffixIcon;
+  final IconData? prefixIcon;
   final GestureTapCallback? suffixIconOnTap;
   final String? Function(String?)? validator;
   final Color? color;
@@ -27,6 +28,7 @@ class AppTextFormField extends StatelessWidget {
     this.title,
     this.hintText,
     this.suffixIcon,
+    this.prefixIcon,
     this.suffixIconOnTap,
     this.validator,
     this.color,
@@ -45,7 +47,7 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding:  EdgeInsets.symmetric(vertical: 14),
       child:  Align(
         alignment: Alignment.topCenter,
         child: Column(
@@ -57,7 +59,7 @@ class AppTextFormField extends StatelessWidget {
               style: TextStyle(
                   color: color ?? ThemeConfig.primary,
                   fontWeight: FontWeight.w500,
-                  fontSize: 16),
+                  fontSize: 14),
             ),
             if(title!=null) const SizedBox(
               height: 20,
@@ -76,7 +78,16 @@ class AppTextFormField extends StatelessWidget {
                 style: const TextStyle(fontSize: 14),
                 decoration: InputDecoration(
                   contentPadding:
-                  inputDecorationPadding ?? EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+                  inputDecorationPadding ?? EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+
+                  prefixIcon: prefixIcon != null
+                      ? IconButton(
+                    icon: Icon(prefixIcon,
+                      color: color??  ThemeConfig.primary,),
+                    onPressed: suffixIconOnTap ?? null,
+                  )
+                      : null,
+
                   suffixIcon: suffixIcon != null
                       ? IconButton(
                     icon: Icon(suffixIcon,

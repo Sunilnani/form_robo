@@ -188,6 +188,13 @@ class ThemeConfig {
       color:Colors.white,
       fontWeight: FontWeight.w500
   );
+
+  static const TextStyle textStylewhite16500 = TextStyle(
+      fontSize: 16,
+      color:Colors.white,
+      fontWeight: FontWeight.w600
+  );
+
   static  TextStyle textStylePrimary16 = TextStyle(
       fontSize: 16,
       color:ThemeConfig.primary,
@@ -288,6 +295,7 @@ class ThemeConfig {
   static TextStyle Medium14 = const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Colors.black);
   static TextStyle Medium14grey =   TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: ThemeConfig.blackColor.withOpacity(0.8));
   static TextStyle Medium12grey = const TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: Colors.grey);
+  static TextStyle Medium16grey =   TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black.withOpacity(0.6));
 
 
   static TextStyle Large14Black = const TextStyle(fontSize: 14,fontWeight: FontWeight.w600,color: Colors.black);
@@ -295,6 +303,8 @@ class ThemeConfig {
   static TextStyle Large12Black = const TextStyle(fontSize: 12,fontWeight: FontWeight.w600,color: Colors.black);
 
   static Color greyLight= Colors.grey.withOpacity(0.2);
+
+ // static Color redColor= Colors.red;
 
   static Widget divider = Container(
     height: 40,
@@ -329,8 +339,15 @@ class ThemeConfig {
   static TextStyle primary12= TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: ThemeConfig.primary);
   static TextStyle primary14= TextStyle(fontSize: 14,fontWeight: FontWeight.w600,color: ThemeConfig.primary);
 
+  static TextStyle red14= TextStyle(fontSize: 14,fontWeight: FontWeight.w600,color: Colors.red);
+
   static TextStyle primary145=  TextStyle(
       color:ThemeConfig.primary,
+      fontWeight: FontWeight.w500,
+      fontSize: 14);
+
+  static TextStyle primary145black=  TextStyle(
+      color:Colors.black,
       fontWeight: FontWeight.w500,
       fontSize: 14);
   static TextStyle primary16= TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: ThemeConfig.primary);

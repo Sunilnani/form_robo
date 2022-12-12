@@ -99,17 +99,19 @@ class _LoginPageState extends State<LoginPage> {
 
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.all(50),
-                    color: Theme.of(context).primaryColor.withOpacity(0.1),
+                    padding: EdgeInsets.only(left: 50,right: 50,top: 70,bottom: 70),
+                    color: Theme.of(context).primaryColor.withOpacity(0.2),
                     child: Form(
                         key: _formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Login",style:ThemeConfig.primary20,),
+                            // Text("Login",style:ThemeConfig.primary20,),
                             SizedBox(height: 20,),
 
                             AppTextFormField(
+                              prefixIcon:Icons.person ,
+
                               focusColor: Colors.white,
                                 fillColor: Colors.white,
                                 validator: (String? value) {
@@ -120,8 +122,10 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                                 controller: _usernameController,
                                 title: "Enter User Namer",
-                                suffixIcon: Icons.person),
+                                //suffixIcon: Icons.person
+                            ),
                             AppTextFormField(
+                              prefixIcon: Icons.lock_open,
                               fillColor: Colors.white,
                               validator: (String? value) {
                                 if (value!.isEmpty) {
@@ -140,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             ),
 
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 40),
 
 
                             InkWell(
@@ -159,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                                     borderRadius: BorderRadius.circular(6),
                                     color: ThemeConfig.primary
                                 ),
-                                child: Text("Login",style: ThemeConfig.textStylewhite16,),
+                                child: Text("Login",style: ThemeConfig.textStylewhite16500,),
                               ),
                             ),
 

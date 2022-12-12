@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child:Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 2),
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                 right: 40,
 
                 child: Image.asset(
-                  'assets/images/drone.png',
+                  'assets/images/drone.jpeg',
                   width: 200,
                 ),
               ),

@@ -55,7 +55,7 @@ class ProfileTextFormField extends StatelessWidget {
             if(title!=null)Text(
               title ?? "",
               style: TextStyle(
-                  color: color ?? ThemeConfig.primary,
+                  color: color ?? Colors.black,
                   fontWeight: FontWeight.w500,
                   fontSize: 14),
             ),
@@ -63,7 +63,7 @@ class ProfileTextFormField extends StatelessWidget {
               width: 20,
             ),
             Container(
-              width: MediaQuery.of(context).size.width*0.5,
+              width: MediaQuery.of(context).size.width*0.45,
 
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
