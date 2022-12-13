@@ -15,13 +15,13 @@ class _InstructionCardState extends State<InstructionCard> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 4),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white
       ),
       width: MediaQuery.of(context).size.width*0.7,
-      height: MediaQuery.of(context).size.height*0.3,
+      height: MediaQuery.of(context).size.height*0.25,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +44,7 @@ class _InstructionCardState extends State<InstructionCard> {
 
           SizedBox(height: 6,),
 
-          Text("1. Move towards the Field/Land and tap on the screen to mark polygon.",style: ThemeConfig.textStyleprimary12,),
+          Text("1.slightly move your device to the end of the boundaries to get the map parameters.",style: ThemeConfig.textStyleprimary12,),
           SizedBox(height: 6,),
 
           Text("2. you will get the map parameters of drawn boundaries in screen.",style: ThemeConfig.textStylegrey12,),

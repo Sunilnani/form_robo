@@ -27,7 +27,7 @@ class _DroneFlyConnectionState extends State<DroneFlyConnection> {
         title: "Drone Connected Successfully",
         description:"Your drone was connected and redirecting to fly / action page.",
         // nextPage:NavigationService().navigatePage(HomePage()),
-      ));
+      ),replace: true);
 
 
     });

@@ -254,7 +254,7 @@ LatLng(24.879999, 74.629997),
                     Container(
                       padding: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height*0.25,
-                      width: MediaQuery.of(context).size.width*0.4,
+                      width: MediaQuery.of(context).size.width*0.35,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
                         color: Colors.white,
@@ -316,7 +316,7 @@ LatLng(24.879999, 74.629997),
                     Container(
                       padding: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height*0.2,
-                      width: MediaQuery.of(context).size.width*0.4,
+                      width: MediaQuery.of(context).size.width*0.35,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
                         color: Colors.white,
@@ -467,16 +467,27 @@ LatLng(24.879999, 74.629997),
                           Column(
                             children: [
                               Text("Distance",style: ThemeConfig.minimumStyleGrey,),
-                              SizedBox(height: 4,),
-                              Text("280 M",style: ThemeConfig.primary14,)
+                              // SizedBox(height: 4,),
+                              Row(
+                                children: [
+
+                                  Image.asset("assets/images/distance.png",width: 34,),
+                                  Text("280 M",style: ThemeConfig.primary14,)
+                                ],
+                              )
                             ],
                           ),
                           ThemeConfig.divider,
                           Column(
                             children: [
                               Text("Fuel Level",style: ThemeConfig.minimumStyleGrey,),
-                              SizedBox(height: 4,),
-                              Text("50 %",style: ThemeConfig.primary14,)
+                              // SizedBox(height: 4,),
+                              Row(
+                                children: [
+                                  Image.asset("assets/images/fuel.png",width: 34,),
+                                  Text("50 %",style: ThemeConfig.primary14,)
+                                ],
+                              )
                             ],
                           ),
                           ThemeConfig.divider,
@@ -545,58 +556,112 @@ LatLng(24.879999, 74.629997),
         builder: (BuildContext context) {
           int selectedRadio = 0;
           return AlertDialog(
-            content: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: List<Widget>.generate(1, (int index) {
-                    return Text("if yes, please click on confirm button to activate it");
-                  }),
-                );
-              },
-            ),
-            title: Text("Do you want to confirm the emergency landing?"),
-            actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    //Navigator.of(ctx).pop();
-                  },
-                  child:  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    alignment: Alignment.center,
-                    height: 40,
-                    width: 120,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: ThemeConfig.primary)
-                      //color: ThemeConfig.primary
-                    ),
-                    child: Text("NO",style:ThemeConfig.primary14,),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Navigator.of(ctx).pop();
-                     NavigationService().navigatePage(EmergencyLandLoadScreen());
+            content: Container(
+              width: 600,
+              height: 240,
+              child: StatefulBuilder(
+                builder: (BuildContext context, StateSetter setState) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: List<Widget>.generate(1, (int index) {
+                      return Column(
+                        children: [
+                          Text("Do you want to confirm the emergency landing?",style: ThemeConfig.red16,),
+                          SizedBox(height: 18,),
+                          Text("if yes, please click on confirm button to activate it",style: ThemeConfig.Medium12grey,),
+                          SizedBox(height: 40,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  NavigationService().pop();
+                                  //Navigator.of(ctx).pop();
+                                },
+                                child:  Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  alignment: Alignment.center,
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      border: Border.all(color: ThemeConfig.primary)
+                                    //color: ThemeConfig.primary
+                                  ),
+                                  child: Text("Cancel",style:ThemeConfig.primary14,),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Navigator.of(ctx).pop();
+                                  NavigationService().navigatePage(EmergencyLandLoadScreen());
 
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    alignment: Alignment.center,
-                    height: 40,
-                    width: 120,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: ThemeConfig.primary
-                    ),
-                    child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
-                  ),
-                ),
-              ],
-            )
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  alignment: Alignment.center,
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: ThemeConfig.primary
+                                  ),
+                                  child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      );
+                    }),
+                  );
+                },
+              ),
+            ),
+            // title: Text("Do you want to confirm the emergency landing?"),
+            actions: <Widget>[
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     TextButton(
+            //       onPressed: () {
+            //         //Navigator.of(ctx).pop();
+            //       },
+            //       child:  Container(
+            //         padding: EdgeInsets.symmetric(horizontal: 20),
+            //         alignment: Alignment.center,
+            //         height: 40,
+            //         width: 120,
+            //         decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(6),
+            //             border: Border.all(color: ThemeConfig.primary)
+            //           //color: ThemeConfig.primary
+            //         ),
+            //         child: Text("NO",style:ThemeConfig.primary14,),
+            //       ),
+            //     ),
+            //     TextButton(
+            //       onPressed: () {
+            //         // Navigator.of(ctx).pop();
+            //          NavigationService().navigatePage(EmergencyLandLoadScreen());
+            //
+            //       },
+            //       child: Container(
+            //         padding: EdgeInsets.symmetric(horizontal: 20),
+            //         alignment: Alignment.center,
+            //         height: 40,
+            //         width: 120,
+            //         decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(6),
+            //             color: ThemeConfig.primary
+            //         ),
+            //         child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
+            //       ),
+            //     ),
+            //   ],
+            // )
             ],
           );
         });
@@ -609,63 +674,121 @@ LatLng(24.879999, 74.629997),
         builder: (BuildContext context) {
           int selectedRadio = 0;
           return AlertDialog(
-            content: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: List<Widget>.generate(1, (int index) {
-                    return Text("if yes, please click on confirm button to activate it");
-                  }),
-                );
-              },
+            content: Container(
+              width: 600,
+              height: 240,
+              child: StatefulBuilder(
+                builder: (BuildContext context, StateSetter setState) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: List<Widget>.generate(1, (int index) {
+                      return Column(
+                        children: [
+                          Text("Do you want to return the drone to the Home Location?",style: ThemeConfig.red16,),
+                          SizedBox(height: 18,),
+                          Text("if yes, please click on confirm button to activate it",style: ThemeConfig.Medium12grey,),
+                          SizedBox(height: 40,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  NavigationService().pop();
+                                  //Navigator.of(ctx).pop();
+                                },
+                                child:  Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 24),
+                                  alignment: Alignment.center,
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      border: Border.all(color: ThemeConfig.primary)
+                                    //color: ThemeConfig.primary
+                                  ),
+                                  child: Text("Cancel",style:ThemeConfig.primary14,),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Navigator.of(ctx).pop();
+                                  // NavigationService().navigatePage(FlyScreen(),replace: true);
+                                  NavigationService().navigatePage(HomeReturnMessagePage(
+                                    title: "Drone Landing...",
+                                    description:"",
+                                    nextPage:FlyScreen(),
+                                  ),replace: true);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 24),
+                                  alignment: Alignment.center,
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: ThemeConfig.primary
+                                  ),
+                                  child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      );
+                    }),
+                  );
+                },
+              ),
             ),
-            title: Text("Do you want to return to the Home Page?"),
-            actions: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      //Navigator.of(ctx).pop();
-                    },
-                    child:  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      alignment: Alignment.center,
-                      height: 40,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(color: ThemeConfig.primary)
-                        //color: ThemeConfig.primary
-                      ),
-                      child: Text("NO",style:ThemeConfig.primary14,),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Navigator.of(ctx).pop();
-                      // NavigationService().navigatePage(FlyScreen(),replace: true);
-                      NavigationService().navigatePage(HomeReturnMessagePage(
-                        title: "Drone Landing...",
-                        description:"",
-                        nextPage:FlyScreen(),
-                      ),replace: true);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      alignment: Alignment.center,
-                      height: 40,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: ThemeConfig.primary
-                      ),
-                      child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
-                    ),
-                  ),
-                ],
-              )
-            ],
+           // title: Text("Do you want to return the drone to the Home Location?",style: ThemeConfig.red14,),
+           //  actions: <Widget>[
+           //    Row(
+           //      mainAxisAlignment: MainAxisAlignment.center,
+           //      children: [
+           //        TextButton(
+           //          onPressed: () {
+           //            //Navigator.of(ctx).pop();
+           //          },
+           //          child:  Container(
+           //            padding: EdgeInsets.symmetric(horizontal: 24),
+           //            alignment: Alignment.center,
+           //            height: 40,
+           //            width: 120,
+           //            decoration: BoxDecoration(
+           //                borderRadius: BorderRadius.circular(6),
+           //                border: Border.all(color: ThemeConfig.primary)
+           //              //color: ThemeConfig.primary
+           //            ),
+           //            child: Text("Cancel",style:ThemeConfig.primary14,),
+           //          ),
+           //        ),
+           //        TextButton(
+           //          onPressed: () {
+           //            // Navigator.of(ctx).pop();
+           //            // NavigationService().navigatePage(FlyScreen(),replace: true);
+           //            NavigationService().navigatePage(HomeReturnMessagePage(
+           //              title: "Drone Landing...",
+           //              description:"",
+           //              nextPage:FlyScreen(),
+           //            ),replace: true);
+           //          },
+           //          child: Container(
+           //            padding: EdgeInsets.symmetric(horizontal: 24),
+           //            alignment: Alignment.center,
+           //            height: 40,
+           //            width: 120,
+           //            decoration: BoxDecoration(
+           //                borderRadius: BorderRadius.circular(6),
+           //                color: ThemeConfig.primary
+           //            ),
+           //            child: Text("Confirm",style: ThemeConfig.textStylewhite16,),
+           //          ),
+           //        ),
+           //      ],
+           //    )
+           //  ],
           );
         });
   }
@@ -688,89 +811,12 @@ class SignalParametersCard extends StatelessWidget {
           },
           child: Row(
             children: [
-              Icon(Icons.arrow_back,size: 24,),
+              Icon(Icons.arrow_back_ios_outlined,size: 18,),
               SizedBox(width: 4,),
               Text("Back")
             ],
           ),
         ),
-
-
-        // Row(
-        //  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //
-        //     InkWell(
-        //       onTap: (){
-        //         NavigationService().pop();
-        //       },
-        //       child: Row(
-        //         children: [
-        //           Icon(Icons.arrow_back,size: 24,),
-        //           SizedBox(width: 4,),
-        //           Text("Back")
-        //         ],
-        //       ),
-        //     ),
-        //     SizedBox(width: 14,),
-        //
-        //     Row(
-        //       children: [
-        //         Icon(Icons.arrow_upward,size: 24,),
-        //         Text("V.S",style: ThemeConfig.minimumStyleGrey,),
-        //         SizedBox(width: 4,),
-        //         Text("1.5 MS/S",style: ThemeConfig.primary14,)
-        //       ],
-        //     ),
-        //     SizedBox(width: 6,),
-        //     Container(
-        //       height: 30,
-        //       width: 2,
-        //       color: Colors.grey.shade300,
-        //     ),
-        //     SizedBox(width: 6,),
-        //     Row(
-        //       children: [
-        //         Icon(Icons.arrow_back,size: 24,),
-        //         Text("H.S",style: ThemeConfig.minimumStyleGrey,),
-        //         SizedBox(width: 4,),
-        //         Text("2.2 M/Sec",style: ThemeConfig.primary14,)
-        //       ],
-        //     ),
-        //     SizedBox(width: 6,),
-        //     Container(
-        //       height: 30,
-        //       width: 2,
-        //       color: Colors.grey.shade300,
-        //     ),
-        //     SizedBox(width: 6,),
-        //     Row(
-        //       children: [
-        //         Text("D",style: ThemeConfig.minimumStyleGrey,),
-        //         SizedBox(width: 4,),
-        //         Text("928 ft",style: ThemeConfig.primary14,)
-        //       ],
-        //     ),
-        //     SizedBox(width: 6,),
-        //     Container(
-        //       height: 30,
-        //       width: 2,
-        //       color: Colors.grey.shade300,
-        //     ),
-        //     SizedBox(width: 6,),
-        //     Row(
-        //       children: [
-        //         Text("H",style: ThemeConfig.minimumStyleGrey,),
-        //         SizedBox(width: 4,),
-        //         Text("200 ft",style: ThemeConfig.primary14,)
-        //       ],
-        //     ),
-        //
-        //
-        //
-        //   ],
-        // ),
-
         Row(
           children: [
             Column(
@@ -778,11 +824,12 @@ class SignalParametersCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Transmitter Signal",style: ThemeConfig.minimumStyleGrey12,),
-                SizedBox(height: 4,),
+                // SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.robot,color: Theme.of(context).primaryColor,size: 16,),
-                    SizedBox(width: 10,),
+                    Image.asset("assets/images/transmitter_signal.png",color: Theme.of(context).primaryColor,width: 34,),
+                    // Icon(FontAwesomeIcons.robot,color: Theme.of(context).primaryColor,size: 16,),
+                    // SizedBox(width: 10,),
                     Icon(FontAwesomeIcons.signal,color: Theme.of(context).primaryColor,size: 12,),
 
                   ],
@@ -791,7 +838,7 @@ class SignalParametersCard extends StatelessWidget {
             ),
             SizedBox(width: 8,),
             Container(
-              height: 30,
+              height: 40,
               width: 2,
               color: Colors.grey.shade300,
             ),
@@ -802,11 +849,12 @@ class SignalParametersCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Telemetry Signal",style: ThemeConfig.minimumStyleGrey12,),
-                SizedBox(height: 4,),
+                // SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.dragon,color: Theme.of(context).primaryColor,size: 16,),
-                    SizedBox(width: 10,),
+                    // Icon(FontAwesomeIcons.dragon,color: Theme.of(context).primaryColor,size: 16,),
+                    // SizedBox(width: 10,),
+                    Image.asset("assets/images/telemetry.png",color: Theme.of(context).primaryColor,width:48,),
                     Icon(FontAwesomeIcons.signal,color: Theme.of(context).primaryColor,size: 12,),
 
                   ],
@@ -816,7 +864,7 @@ class SignalParametersCard extends StatelessWidget {
 
             SizedBox(width: 8,),
             Container(
-              height: 30,
+              height: 40,
               width: 2,
               color: Colors.grey.shade300,
             ),
@@ -826,11 +874,12 @@ class SignalParametersCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Transmitter Battery",style: ThemeConfig.minimumStyleGrey12,),
-                SizedBox(height: 4,),
+                // SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.batteryHalf,color: Theme.of(context).primaryColor,size: 14,),
-                    SizedBox(width: 10,),
+                    // Icon(FontAwesomeIcons.batteryHalf,color: Theme.of(context).primaryColor,size: 14,),
+                    // SizedBox(width: 10,),
+                    Image.asset("assets/images/battery.png",color: Theme.of(context).primaryColor,width: 34,),
                     Text("89 %",style: ThemeConfig.Medium14grey,)
                   ],
                 )
@@ -839,7 +888,7 @@ class SignalParametersCard extends StatelessWidget {
 
             SizedBox(width: 8,),
             Container(
-              height: 30,
+              height: 40,
               width: 2,
               color: Colors.grey.shade300,
             ),
@@ -849,11 +898,12 @@ class SignalParametersCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Brightness",style: ThemeConfig.minimumStyleGrey12,),
-                SizedBox(height: 4,),
+                // SizedBox(height: 4,),
                 Row(
                   children: [
-                    Icon(FontAwesomeIcons.solidSun,color: Colors.grey,size: 14,),
-                    SizedBox(width: 10,),
+                    // Icon(FontAwesomeIcons.solidSun,color: Colors.grey,size: 14,),
+                    // SizedBox(width: 10,),
+                    Image.asset("assets/images/brightness.png",color: Theme.of(context).primaryColor,width: 34,),
                     Text("89 %",style: ThemeConfig.Medium14grey,)
                   ],
                 )
@@ -862,22 +912,143 @@ class SignalParametersCard extends StatelessWidget {
 
             SizedBox(width: 8,),
             Container(
-              height: 30,
+              height: 40,
               width: 2,
               color: Colors.grey.shade300,
             ),
             SizedBox(width: 8,),
 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    alignment: Alignment.center,
+                    height: 40,
+                    width: 60,
+                    child: Text("Calibration Settings",style: ThemeConfig.minimumStyleGrey12,)),
+                SizedBox(width: 2,),
+                Image.asset("assets/images/calibration.png",width: 26,),
+                // SizedBox(height: 4,),
 
-            InkWell(
-              onTap: (){
-                NavigationService().navigatePage(SettingsPage());
-              },
-                child: Icon(Icons.settings,color: Theme.of(context).primaryColor,size: 20,))
+              ],
+            ),
+
+
+            //  Icon(Icons.settings,color: Theme.of(context).primaryColor,size: 20,)
 
 
           ],
         )
+
+
+
+        // Row(
+        //   children: [
+        //     Column(
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         Text("Transmitter Signal",style: ThemeConfig.minimumStyleGrey12,),
+        //         SizedBox(height: 4,),
+        //         Row(
+        //           children: [
+        //             Icon(FontAwesomeIcons.robot,color: Theme.of(context).primaryColor,size: 16,),
+        //             SizedBox(width: 10,),
+        //             Icon(FontAwesomeIcons.signal,color: Theme.of(context).primaryColor,size: 12,),
+        //
+        //           ],
+        //         )
+        //       ],
+        //     ),
+        //     SizedBox(width: 8,),
+        //     Container(
+        //       height: 30,
+        //       width: 2,
+        //       color: Colors.grey.shade300,
+        //     ),
+        //     SizedBox(width: 8,),
+        //
+        //
+        //     Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         Text("Telemetry Signal",style: ThemeConfig.minimumStyleGrey12,),
+        //         SizedBox(height: 4,),
+        //         Row(
+        //           children: [
+        //             Icon(FontAwesomeIcons.dragon,color: Theme.of(context).primaryColor,size: 16,),
+        //             SizedBox(width: 10,),
+        //             Icon(FontAwesomeIcons.signal,color: Theme.of(context).primaryColor,size: 12,),
+        //
+        //           ],
+        //         )
+        //       ],
+        //     ),
+        //
+        //     SizedBox(width: 8,),
+        //     Container(
+        //       height: 30,
+        //       width: 2,
+        //       color: Colors.grey.shade300,
+        //     ),
+        //     SizedBox(width: 8,),
+        //
+        //     Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         Text("Transmitter Battery",style: ThemeConfig.minimumStyleGrey12,),
+        //         SizedBox(height: 4,),
+        //         Row(
+        //           children: [
+        //             Icon(FontAwesomeIcons.batteryHalf,color: Theme.of(context).primaryColor,size: 14,),
+        //             SizedBox(width: 10,),
+        //             Text("89 %",style: ThemeConfig.Medium14grey,)
+        //           ],
+        //         )
+        //       ],
+        //     ),
+        //
+        //     SizedBox(width: 8,),
+        //     Container(
+        //       height: 30,
+        //       width: 2,
+        //       color: Colors.grey.shade300,
+        //     ),
+        //     SizedBox(width: 8,),
+        //
+        //     Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         Text("Brightness",style: ThemeConfig.minimumStyleGrey12,),
+        //         SizedBox(height: 4,),
+        //         Row(
+        //           children: [
+        //             Icon(FontAwesomeIcons.solidSun,color: Colors.grey,size: 14,),
+        //             SizedBox(width: 10,),
+        //             Text("89 %",style: ThemeConfig.Medium14grey,)
+        //           ],
+        //         )
+        //       ],
+        //     ),
+        //
+        //     SizedBox(width: 8,),
+        //     Container(
+        //       height: 30,
+        //       width: 2,
+        //       color: Colors.grey.shade300,
+        //     ),
+        //     SizedBox(width: 8,),
+        //
+        //
+        //     InkWell(
+        //       onTap: (){
+        //         NavigationService().navigatePage(SettingsPage());
+        //       },
+        //         child: Icon(Icons.settings,color: Theme.of(context).primaryColor,size: 20,))
+        //
+        //
+        //   ],
+        // )
       ],
     );
   }

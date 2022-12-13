@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
 import 'package:form_robo/screens/land_profile_screens/add_land_profile.dart';
@@ -8,11 +9,15 @@ import 'package:form_robo/screens/widgets/instructions_card.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'dart:ui' as ui;
+
+
 
 
 
 class AddMapScreen extends StatefulWidget {
-  const AddMapScreen({Key? key}) : super(key: key);
+  const AddMapScreen({Key? key, this.selectedMap}) : super(key: key);
+  final int? selectedMap;
 
   @override
   State<AddMapScreen> createState() => _AddMapScreenState();
@@ -229,12 +234,28 @@ class _AddMapScreenState extends State<AddMapScreen> {
       //refresh UI
       latLen.add(LatLng(position.latitude, position.longitude));
       _polyline.add(
+        
           Polyline(
             polylineId: PolylineId('1'),
             points: latLen,
             color: Colors.green,
           )
       );
+
+     // _markers.add(
+     //    Marker(
+     //  // given marker id
+     //  markerId: MarkerId("1"),
+     //  // given marker icon
+     //  icon: BitmapDescriptor.defaultMarker,
+     //  // given position
+     //  //position: ,
+     //  infoWindow: InfoWindow(
+     //  // given title for marker
+     //  title: 'Location:',
+     //  ),
+     //  )
+     //  );
 
       print("added latlan are -------------------------------------------------------------->${latLen}");
     });
@@ -327,6 +348,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
   );
 
   final Set<Marker> _markers = {};
+  
   final Set<Polyline> _polyline = {};
 
 
@@ -339,11 +361,38 @@ class _AddMapScreenState extends State<AddMapScreen> {
     // LatLng(12.971599, 77.594563),
   ];
 
+
+
+
+  // Future<Uint8List> getBytesFromAsset(String path, int width) async {
+  //   ByteData data = await rootBundle.load(path);
+  //   ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+  //   ui.FrameInfo fi = await codec.getNextFrame();
+  //   return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+  // }
+  //
+  // Future<BitmapDescriptor> getBitmapDescriptorFromAssetBytes(String path, int width) async {
+  //   final Uint8List imageData = await getBytesFromAsset(path, width);
+  //   return BitmapDescriptor.fromBytes(imageData);
+  //
+  // }
+
+
+
+  late BitmapDescriptor pinLocationIcon;
+  void setCustomMapPin() async {
+    pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 4.5),
+        'assets/images/marker.png',);
+   // pinLocationIcon = await getBitmapDescriptorFromAssetBytes("assets/images/marker.png", 35);
+  }
+
   @override
   void initState() {
     //checkGps();
     //checkGps();
     getLocation();
+    setCustomMapPin();
     super.initState();
   }
 
@@ -353,20 +402,20 @@ class _AddMapScreenState extends State<AddMapScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 4,
-        backgroundColor: ThemeConfig.whiteColor,
-        iconTheme: IconThemeData(color: ThemeConfig.primary),
-        centerTitle: true,
-        title: Text(
-          "Add Map Boundaries",
-          overflow: TextOverflow.visible,
-          softWrap: true,
-          style: Theme.of(context).textTheme.headline5!.copyWith(
-              fontSize: 18,
-              fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
-
-      ),
+      // appBar: AppBar(
+      //   elevation: 4,
+      //   backgroundColor: ThemeConfig.whiteColor,
+      //   iconTheme: IconThemeData(color: ThemeConfig.primary),
+      //   centerTitle: true,
+      //   title: Text(
+      //     "Add Map Boundaries",
+      //     overflow: TextOverflow.visible,
+      //     softWrap: true,
+      //     style: Theme.of(context).textTheme.headline5!.copyWith(
+      //         fontSize: 18,
+      //         fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
+      //
+      // ),
       body: SafeArea(
         child:
     //
@@ -387,7 +436,9 @@ class _AddMapScreenState extends State<AddMapScreen> {
             //       }),
             // ),
 
-           _selectedIndex == 1?
+          // _selectedIndex == 1?
+
+            widget.selectedMap == 1 ?
 
 
             GoogleMap(
@@ -447,10 +498,67 @@ class _AddMapScreenState extends State<AddMapScreen> {
             ),
 
 
+            Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child:Container(
+                  padding: EdgeInsets.symmetric(horizontal: 14,vertical: 0),
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius:  6,
+                          spreadRadius: 2)
+                    ],
+
+
+                  ),
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              NavigationService().pop();
+                              // NavigationService().navigatePage(HomePage(),replace: true);
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.arrow_back_ios_outlined,size: 18,),
+                                SizedBox(width: 4,),
+                                Text("Back"),
+
+
+                              ],
+                            ),
+                          ),
+
+
+                        ],
+                      ),
+                      Text(
+                        "Add Map Boundaries",
+                        overflow: TextOverflow.visible,
+                        softWrap: true,
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600, color: ThemeConfig.blackColor),),
+                      Container()
+                    ],
+                  ),
+                )
+            ),
+
+
 
 
             Positioned(
-              top: 20,
+              top: 80,
               left: 20,
 
               child: Container(
@@ -461,7 +569,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
                 ),
 
                 height: MediaQuery.of(context).size.height*0.11,
-                 width: MediaQuery.of(context).size.width*0.25,
+                 width: MediaQuery.of(context).size.width*0.24,
                 child: ListView.separated(
                   //shrinkWrap: true,
                   itemCount: mapTypeList.length,
@@ -508,68 +616,69 @@ class _AddMapScreenState extends State<AddMapScreen> {
               ),
             ),
 
-            Positioned(
-              top: 20,
-              left: 330,
-              right: 320,
-              child: Container(
-                padding: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
-                ),
+            // Positioned(
+            //   top: 20,
+            //   left: 330,
+            //   right: 320,
+            //   child: Container(
+            //     padding: EdgeInsets.all(4),
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(8),
+            //       color: Colors.white,
+            //     ),
+            //
+            //     height: MediaQuery.of(context).size.height*0.11,
+            //     width: MediaQuery.of(context).size.width*0.1,
+            //     // width: MediaQuery.of(context).size.width*0.45,
+            //     child: ListView.separated(
+            //       //shrinkWrap: true,
+            //       itemCount: sprayingSpeed.length,
+            //       physics: BouncingScrollPhysics(),
+            //       scrollDirection: Axis.horizontal,
+            //       itemBuilder: (context, index) {
+            //
+            //         // orderId = notifications!.orders![index].id;
+            //
+            //         return InkWell(
+            //           onTap: (){
+            //
+            //             setState(() {
+            //               // isSelected = !isSelected;
+            //               _selectedIndex = index;
+            //               selected_name=sprayingSpeed[index];
+            //               print("---------------------------> index ${_selectedIndex}");
+            //
+            //             });
+            //
+            //           },
+            //           child: Row(
+            //             children: [
+            //               Container(
+            //                 padding: EdgeInsets.all(4),
+            //                 alignment: Alignment.center,
+            //                 decoration: ThemeConfig.boxDecorationWithRoundBorder(
+            //                   context,
+            //                   radius: 4,
+            //                   color: _selectedIndex == index ?  ThemeConfig.primary : Colors.white,),
+            //                 height: 50,
+            //                 width: 100,
+            //                 child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
+            //               )
+            //             ],
+            //           ),
+            //
+            //         );
+            //       },
+            //       separatorBuilder: (BuildContext context, int index) {
+            //         return const SizedBox(height: 0);
+            //       },
+            //     ),
+            //   ),
+            // ),
 
-                height: MediaQuery.of(context).size.height*0.11,
-                width: MediaQuery.of(context).size.width*0.1,
-                // width: MediaQuery.of(context).size.width*0.45,
-                child: ListView.separated(
-                  //shrinkWrap: true,
-                  itemCount: sprayingSpeed.length,
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
 
-                    // orderId = notifications!.orders![index].id;
-
-                    return InkWell(
-                      onTap: (){
-
-                        setState(() {
-                          // isSelected = !isSelected;
-                          _selectedIndex = index;
-                          selected_name=sprayingSpeed[index];
-                          print("---------------------------> index ${_selectedIndex}");
-
-                        });
-
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(4),
-                            alignment: Alignment.center,
-                            decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                              context,
-                              radius: 4,
-                              color: _selectedIndex == index ?  ThemeConfig.primary : Colors.white,),
-                            height: 50,
-                            width: 100,
-                            child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                          )
-                        ],
-                      ),
-
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(height: 0);
-                  },
-                ),
-              ),
-            ),
-
-
-            _selectedIndex == 0?
+           // _selectedIndex == 0?
+            widget.selectedMap == 0?
 
             Positioned(
                 bottom: 20,
@@ -600,7 +709,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
                         borderRadius: BorderRadius.circular(6),
                         color: ThemeConfig.primary
                     ),
-                    child:getgpsEnsble?  Text("End",style: ThemeConfig.textStylewhite16,):Text("Start",style: ThemeConfig.textStylewhite16,),
+                    child:getgpsEnsble?  Text("End",style: ThemeConfig.textStylewhite16,):Text("Start Roaming",style: ThemeConfig.textStylewhite16,),
                   ),
                 )
             ):
@@ -651,16 +760,21 @@ class _AddMapScreenState extends State<AddMapScreen> {
   }
 
 
+
   _handleTap(LatLng point) {
     setState(() {
-      _markers.add(Marker(
+      //final icon = await getBitmapDescriptorFromAssetBytes("assets/images/marker.png", 35);
+      _markers.add(
+          Marker(
         markerId: MarkerId(point.toString()),
         position: point,
         infoWindow: InfoWindow(
           title: 'I am a marker',
         ),
-        icon:
-        BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
+
+       //icon:await getBitmapDescriptorFromAssetBytes("assets/images/marker.png", 35)
+       // icon:pinLocationIcon,
+       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ));
 
       latLan.add(LatLng(point.latitude, point.longitude));

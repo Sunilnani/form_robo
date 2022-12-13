@@ -240,7 +240,7 @@ class _FlyScreenState extends State<FlyScreen> {
                     Container(
                       padding: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height*0.25,
-                      width: MediaQuery.of(context).size.width*0.36,
+                      width: MediaQuery.of(context).size.width*0.35,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
                         color: Colors.white,
@@ -252,56 +252,80 @@ class _FlyScreenState extends State<FlyScreen> {
                               spreadRadius: 2)
                         ],
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
+
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Wheat Field",style: ThemeConfig.Large14Black,),
-                              SizedBox(height: 6,),
-
-                              Row(
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Land Size  -  ",style: ThemeConfig.minimumStyleGrey,),
-                                  SizedBox(height: 4,),
-                                  Text("5 acrs",style: ThemeConfig.red14,)
+                                  Text("Wheat Field",style: ThemeConfig.Large14Black,),
+                                  SizedBox(height: 6,),
+
+                                  Row(
+                                    children: [
+                                      Text("Land Size  -  ",style: ThemeConfig.minimumStyleGrey,),
+                                      SizedBox(height: 4,),
+                                      Text("5 acrs",style: ThemeConfig.red14,)
+                                    ],
+                                  ),
+                                  SizedBox(height: 6,),
+
+                                  Row(
+                                    children: [
+                                      Text("Total Time  -  ",style: ThemeConfig.minimumStyleGrey,),
+                                      SizedBox(height: 4,),
+                                      Text("20 min",style: ThemeConfig.red14,)
+                                    ],
+                                  ),
+                                  SizedBox(height: 14,),
+                                  // InkWell(
+                                  //   onTap: (){
+                                  //     NavigationService().navigatePage(LandProfiles());
+                                  //   },
+                                  //   child: Row(
+                                  //
+                                  //     children: [
+                                  //       SizedBox(width: 40,),
+                                  //       Icon(FontAwesomeIcons.handPointer,size: 12,color: Colors.grey,),
+                                  //       SizedBox(width: 4,),
+                                  //       Text("Tap here to change the plan",style: ThemeConfig.Medium12grey,)
+                                  //     ],
+                                  //   ),
+                                  // )
                                 ],
                               ),
-                              SizedBox(height: 6,),
+                              Container(
+                                alignment: Alignment.topCenter,
 
-                              Row(
-                                children: [
-                                  Text("Total Time  -  ",style: ThemeConfig.minimumStyleGrey,),
-                                  SizedBox(height: 4,),
-                                  Text("20 min",style: ThemeConfig.red14,)
-                                ],
-                              ),
-                              SizedBox(height: 10,),
-                              InkWell(
-                                onTap: (){
-                                  NavigationService().navigatePage(LandProfiles());
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(FontAwesomeIcons.handPointer,size: 12,color: Colors.grey,),
-                                    SizedBox(width: 4,),
-                                    Text("Tap here to change the plan",style: ThemeConfig.Medium12grey,)
-                                  ],
+                                // height: 110,
+                                // width: 90,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6),
+
                                 ),
-                              )
+                                child: Image.asset("assets/images/wheat.png",width: 80,),
+                              ),
                             ],
                           ),
-                          Container(
-                            // height: 110,
-                            // width: 90,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
+                          SizedBox(height: 6,),
+                          InkWell(
+                            onTap: (){
+                              NavigationService().navigatePage(LandProfiles());
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
 
+                              children: [
+                                Icon(FontAwesomeIcons.handPointer,size: 12,color: Colors.grey,),
+                                SizedBox(width: 4,),
+                                Text("Tap here to change the plan",style: ThemeConfig.Medium12grey,)
+                              ],
                             ),
-                            child: Image.asset("assets/images/wheat.png",width: 80,),
-                          ),
+                          )
                         ],
                       ),
                     ),

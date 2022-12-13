@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_robo/components/theme_config.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:perfect_volume_control/perfect_volume_control.dart';
 import 'package:flutter_screen_wake/flutter_screen_wake.dart';
 
@@ -121,11 +122,15 @@ class _SettingsPageState extends State<SettingsPage> {
                       divisions: 100,
                     ),
                     SizedBox(width: 20,),
-                    // Text("$currentvol"),
+
+
+                      Text("${currentvol * 100} %"),
 
 
                   ],
                 ),
+
+
 
                 SizedBox(height: 20,),
 
@@ -148,7 +153,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                     ),
                     SizedBox(width: 20,),
-                    //Text("$currentvol"),
+                    Text("${brightness * 100} %"),
 
 
                   ],
@@ -213,129 +218,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 //
                 //   ],
                 // ),
-                //
-                // SizedBox(height: 20,),
-                //
-                // Row(
-                //   children: [
-                //     Text("GPS Automatic           ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
-                //     SizedBox(width: 20,),
-                //
-                //
-                //     Container(
-                //       height: MediaQuery.of(context).size.height*0.1,
-                //       width: MediaQuery.of(context).size.width*0.45,
-                //       child: ListView.separated(
-                //         //shrinkWrap: true,
-                //         itemCount: mapType.length,
-                //         physics: BouncingScrollPhysics(),
-                //         scrollDirection: Axis.horizontal,
-                //         itemBuilder: (context, index) {
-                //
-                //           // orderId = notifications!.orders![index].id;
-                //
-                //           return InkWell(
-                //             onTap: (){
-                //
-                //               setState(() {
-                //                 // isSelected = !isSelected;
-                //                 _selectedmapIndex = index;
-                //                 selected_map=mapType[index];
-                //                 print("---------------------------> index ${_selectedmapIndex}");
-                //
-                //               });
-                //
-                //             },
-                //             child: Row(
-                //               children: [
-                //                 Container(
-                //                   alignment: Alignment.center,
-                //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                //                     context,
-                //                     radius: 4,
-                //                     color: _selectedmapIndex == index ?   ThemeConfig.primary  : Colors.white,),
-                //                   height: 40,
-                //                   width: 100,
-                //                   child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                //                 )
-                //               ],
-                //             ),
-                //
-                //           );
-                //         },
-                //         separatorBuilder: (BuildContext context, int index) {
-                //           return const SizedBox(height: 0);
-                //         },
-                //       ),
-                //     ),
-                //
-                //
-                //
-                //   ],
-                // ),
-                //
-                //
-                // SizedBox(height: 20,),
-                //
-                // Row(
-                //   children: [
-                //     Text("Mobile Network          ",style: TextStyle(color: ThemeConfig.blackColor,fontSize: 14,fontWeight: FontWeight.w500),),
-                //     SizedBox(width: 20,),
-                //
-                //
-                //     Container(
-                //       height: MediaQuery.of(context).size.height*0.1,
-                //       width: MediaQuery.of(context).size.width*0.45,
-                //       child: ListView.separated(
-                //         //shrinkWrap: true,
-                //         itemCount: mapType.length,
-                //         physics: BouncingScrollPhysics(),
-                //         scrollDirection: Axis.horizontal,
-                //         itemBuilder: (context, index) {
-                //
-                //           // orderId = notifications!.orders![index].id;
-                //
-                //           return InkWell(
-                //             onTap: (){
-                //
-                //               setState(() {
-                //                 // isSelected = !isSelected;
-                //                 _selectedmapIndex = index;
-                //                 selected_map=mapType[index];
-                //                 print("---------------------------> index ${_selectedmapIndex}");
-                //
-                //               });
-                //
-                //             },
-                //             child: Row(
-                //               children: [
-                //                 Container(
-                //                   alignment: Alignment.center,
-                //                   decoration: ThemeConfig.boxDecorationWithRoundBorder(
-                //                     context,
-                //                     radius: 4,
-                //                     color: _selectedmapIndex == index ?   ThemeConfig.primary  : Colors.white,),
-                //                   height: 40,
-                //                   width: 100,
-                //                   child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
-                //                 )
-                //               ],
-                //             ),
-                //
-                //           );
-                //         },
-                //         separatorBuilder: (BuildContext context, int index) {
-                //           return const SizedBox(height: 0);
-                //         },
-                //       ),
-                //     ),
-                //
-                //
-                //
-                //   ],
-                // ),
 
-                //SizedBox(height: 20,),
+
 
               ],
             ),

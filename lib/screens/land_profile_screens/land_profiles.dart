@@ -176,7 +176,8 @@ class _LandProfilesState extends State<LandProfiles> {
                     onMapCreated: (controller){
                       _controller.complete(controller);
                     },
-            zoomControlsEnabled: false,
+                    zoomControlsEnabled: false,
+                    mapType: MapType.normal,
 
                     // markers: {
                     //   Marker(
@@ -252,7 +253,8 @@ class _LandProfilesState extends State<LandProfiles> {
                                 softWrap: true,
                                 style: Theme.of(context).textTheme.headline5!.copyWith(
                                     fontSize: 18,
-                                    fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
+                                    fontWeight: FontWeight.w600, color: ThemeConfig.blackColor  ),),
+
                             ],
                           ),
                         ),

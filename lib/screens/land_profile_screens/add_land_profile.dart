@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/app_custom_card.dart';
 import 'package:form_robo/components/app_drop_down_search.dart';
 import 'package:form_robo/components/navigation_service.dart';
@@ -292,7 +293,7 @@ class _AddLandProfileState extends State<AddLandProfile> {
                                                       decoration: ThemeConfig.boxDecorationWithRoundBorder(
                                                         context,
                                                         radius: 4,
-                                                        color: _selectedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                                                        color: _selectedIndex == index ?  ThemeConfig.primary : Colors.white,),
                                                       height: 40,
                                                       width: 100,
                                                       child: Text("${sprayingSpeed[index]}",style: _selectedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
@@ -355,7 +356,7 @@ class _AddLandProfileState extends State<AddLandProfile> {
                                                       decoration: ThemeConfig.boxDecorationWithRoundBorder(
                                                         context,
                                                         radius: 4,
-                                                        color: _selectedSpeedIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                                                        color: _selectedSpeedIndex == index ?  ThemeConfig.primary  : Colors.white,),
                                                       height: 40,
                                                       width: 100,
                                                       child: Text("${_speedType[index]}",style: _selectedSpeedIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
@@ -374,8 +375,7 @@ class _AddLandProfileState extends State<AddLandProfile> {
 
 
                                       ],
-                                    ):SizedBox()
-                                    ,
+                                    ):SizedBox(),
 
                                     SizedBox(height: 20,),
 
@@ -416,7 +416,7 @@ class _AddLandProfileState extends State<AddLandProfile> {
                                                       decoration: ThemeConfig.boxDecorationWithRoundBorder(
                                                         context,
                                                         radius: 4,
-                                                        color: _selectedmapIndex == index ?  Theme.of(context).primaryColor : Colors.white,),
+                                                        color: _selectedmapIndex == index ?  ThemeConfig.primary  : Colors.white,),
                                                       height: 40,
                                                       width: 100,
                                                       child: Text("${mapType[index]}",style: _selectedmapIndex == index ? ThemeConfig.Large14white:ThemeConfig.Large14Black,),
@@ -439,11 +439,6 @@ class _AddLandProfileState extends State<AddLandProfile> {
 
                                   ],
                                 )),
-
-
-
-
-
 
                             // Row(
                             //   children: [
@@ -765,7 +760,7 @@ class _AddLandProfileState extends State<AddLandProfile> {
                       padding: const EdgeInsets.all(4.0),
                       child: InkWell(
                         onTap: (){
-                          NavigationService().navigatePage(MapInstructionScreen());
+                          NavigationService().navigatePage(MapInstructionScreen(isSelectedmap: _selectedmapIndex,));
                         },
                         child: Container(
                           alignment: Alignment.center,
@@ -785,7 +780,21 @@ class _AddLandProfileState extends State<AddLandProfile> {
                           ),
                           height: 250,
                           width: double.infinity,
-                          child: Text("Click here to add parameters"),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+
+                              Icon(FontAwesomeIcons.handPointer,size: 22,color: Colors.grey,),
+                              SizedBox(height: 6,),
+                              Text("Tap here",style: ThemeConfig.primary16,),
+                              SizedBox(height: 8,),
+                              _selectedmapIndex == 0 ?  Text("To add map boundaries with GPS in Auto Mode",style: ThemeConfig.primary16,):
+                              Text("To add map boundaries with GPS in Manual Mode",style: ThemeConfig.primary16,),
+                              SizedBox(height: 6,),
+                              Text("Note: please turn on your location, to use this feature",style: ThemeConfig.red12medium,)
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -887,7 +896,7 @@ class _AddLandProfileState extends State<AddLandProfile> {
                         softWrap: true,
                         style: Theme.of(context).textTheme.headline5!.copyWith(
                             fontSize: 18,
-                            fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
+                            fontWeight: FontWeight.w600, color: ThemeConfig.blackColor),),
                       Container()
                     ],
                   ),

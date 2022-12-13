@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
 import 'package:form_robo/screens/add_map_screens/add_map_screen.dart';
@@ -12,7 +13,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 class MapInstructionScreen extends StatefulWidget {
-  const MapInstructionScreen({Key? key}) : super(key: key);
+  const MapInstructionScreen({Key? key , this.isSelectedmap}) : super(key: key);
+
+  final int? isSelectedmap;
 
   @override
   State<MapInstructionScreen> createState() => _MapInstructionScreenState();
@@ -346,27 +349,27 @@ class _MapInstructionScreenState extends State<MapInstructionScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 4,
-        centerTitle: true,
-        backgroundColor: ThemeConfig.whiteColor,
-        iconTheme: IconThemeData(color: ThemeConfig.primary),
-        title: Text(
-          "Add Map Boundaries",
-          overflow: TextOverflow.visible,
-          softWrap: true,
-          style: Theme.of(context).textTheme.headline5!.copyWith(
-              fontSize: 18,
-              fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
-
-      ),
+      // appBar: AppBar(
+      //   elevation: 4,
+      //   centerTitle: true,
+      //   backgroundColor: ThemeConfig.whiteColor,
+      //   iconTheme: IconThemeData(color: ThemeConfig.primary),
+      //   title: Text(
+      //     "Add Map Boundaries",
+      //     overflow: TextOverflow.visible,
+      //     softWrap: true,
+      //     style: Theme.of(context).textTheme.headline5!.copyWith(
+      //         fontSize: 18,
+      //         fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
+      //
+      // ),
       body: SafeArea(
         child: Stack(
           children: [
 
             InkWell(
               onTap: (){
-                NavigationService().navigatePage(AddMapScreen());
+                NavigationService().navigatePage(AddMapScreen(selectedMap: widget.isSelectedmap,));
               },
               child: Container(
                 alignment: Alignment.center,
@@ -386,8 +389,77 @@ class _MapInstructionScreenState extends State<MapInstructionScreen> {
                 ),
                 height:MediaQuery.of(context).size.height,
                 width: double.infinity,
-                child: Text("Click here to add parameters"),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+
+                    Icon(FontAwesomeIcons.handPointer,size: 22,color: Colors.grey,),
+
+                    SizedBox(height: 10,),
+                    widget.isSelectedmap == 0 ?  Text("click on start button to add map boundaries with GPS in Auto Mode",style: ThemeConfig.textStyleGrey14,):
+                    Text("click on start button to add map boundaries with GPS in Manual Mode",style: ThemeConfig.primary16,),
+
+                  ],
+                ),
               ),
+            ),
+
+
+            Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child:Container(
+                  padding: EdgeInsets.symmetric(horizontal: 14,vertical: 0),
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius:  10,
+                          spreadRadius: 2)
+                    ],
+
+
+                  ),
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              NavigationService().pop();
+                              // NavigationService().navigatePage(HomePage(),replace: true);
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.arrow_back_ios_outlined,size: 18,),
+                                SizedBox(width: 4,),
+                                Text("Back"),
+
+
+                              ],
+                            ),
+                          ),
+
+
+                        ],
+                      ),
+                      Text(
+                        "Add Map Boundaries",
+                        overflow: TextOverflow.visible,
+                        softWrap: true,
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600, color: ThemeConfig.blackColor),),
+                      Container()
+                    ],
+                  ),
+                )
             ),
 
             // _selectedIndex == 1?
@@ -457,7 +529,7 @@ class _MapInstructionScreenState extends State<MapInstructionScreen> {
 
 
             Positioned(
-                bottom: 10,
+                bottom: 20,
                 left: 50,
                 right: 50,
                 child:InstructionCard()
