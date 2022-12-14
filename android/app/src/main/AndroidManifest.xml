@@ -9,7 +9,7 @@
 
 
    <application
-        android:label="form_robo"
+        android:label="farm_robo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

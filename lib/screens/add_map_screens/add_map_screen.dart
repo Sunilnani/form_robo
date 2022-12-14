@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:form_robo/components/location_service.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
 import 'package:form_robo/screens/land_profile_screens/add_land_profile.dart';
@@ -158,7 +159,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
   bool servicestatus = false;
   bool haspermission = false;
   LocationPermission? permission;
-  late Position position;
+   Position? position;
   String long = "", lat = "";
   late StreamSubscription<Position> positionStream;
 
@@ -169,8 +170,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
   GoogleMapController? mapController;
 
   List<LatLng> latLan = [
-    LatLng(19.0759837, 72.8776559),
-
+  // const LatLng(19.0759837, 72.8776559),
   ];
 
   List<Marker> markers=[];
@@ -224,15 +224,19 @@ class _AddMapScreenState extends State<AddMapScreen> {
 
   getLocation() async {
     position = await Geolocator.getCurrentPosition();
-    print(position.longitude); //Output: 80.24599079
-    print(position.latitude); //Output: 29.6593457
+    print(position!.longitude); //Output: 80.24599079
+    print(position!.latitude); //Output: 29.6593457
 
-    long = position.longitude.toString();
-    lat = position.latitude.toString();
+    long = position!.longitude.toString();
+    lat = position!.latitude.toString();
+
+
 
     setState(() {
       //refresh UI
-      latLen.add(LatLng(position.latitude, position.longitude));
+      latLen.add(LatLng(position!.latitude, position!.longitude));
+
+      latLan.add(LatLng(position!.latitude, position!.longitude));
       _polyline.add(
         
           Polyline(
@@ -319,12 +323,12 @@ class _AddMapScreenState extends State<AddMapScreen> {
 
 
 
-  List<String> sprayingSpeed=["Auto","Manual",];
-
-  String? selected_map;
-
-
-  int _selectedIndex = 0;
+  // List<String> sprayingSpeed=["Auto","Manual",];
+  //
+  // String? selected_map;
+  //
+  //
+  // int _selectedIndex = 0;
 
 
   List<String> mapTypeList=["Normal","Satellite",];
@@ -342,10 +346,10 @@ class _AddMapScreenState extends State<AddMapScreen> {
 
   Completer<GoogleMapController> _mapcontroller = Completer();
 
-  static final CameraPosition _kGoogle = const CameraPosition(
-    target: LatLng(19.0759837, 72.8776559),
-    zoom: 14,
-  );
+  // static final CameraPosition _kGoogle = const CameraPosition(
+  //   target: LatLng(19.0759837, 72.8776559),
+  //   zoom: 14,
+  // );
 
   final Set<Marker> _markers = {};
   
@@ -364,18 +368,6 @@ class _AddMapScreenState extends State<AddMapScreen> {
 
 
 
-  // Future<Uint8List> getBytesFromAsset(String path, int width) async {
-  //   ByteData data = await rootBundle.load(path);
-  //   ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
-  //   ui.FrameInfo fi = await codec.getNextFrame();
-  //   return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
-  // }
-  //
-  // Future<BitmapDescriptor> getBitmapDescriptorFromAssetBytes(String path, int width) async {
-  //   final Uint8List imageData = await getBytesFromAsset(path, width);
-  //   return BitmapDescriptor.fromBytes(imageData);
-  //
-  // }
 
 
 
@@ -394,6 +386,8 @@ class _AddMapScreenState extends State<AddMapScreen> {
     getLocation();
     setCustomMapPin();
     super.initState();
+
+
   }
 
 
@@ -402,28 +396,17 @@ class _AddMapScreenState extends State<AddMapScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 4,
-      //   backgroundColor: ThemeConfig.whiteColor,
-      //   iconTheme: IconThemeData(color: ThemeConfig.primary),
-      //   centerTitle: true,
-      //   title: Text(
-      //     "Add Map Boundaries",
-      //     overflow: TextOverflow.visible,
-      //     softWrap: true,
-      //     style: Theme.of(context).textTheme.headline5!.copyWith(
-      //         fontSize: 18,
-      //         fontWeight: FontWeight.w600, color: ThemeConfig.primary),),
-      //
-      // ),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child:
-    //
-    //     _markers == null || _polyline == null || position == null ?
-    //     const Center(
-    //     child: CircularProgressIndicator(),
-    // )
-    // :
+        position == null ?
+        Center(
+          child: Image.asset("assets/images/drone-flying.gif",
+            //   height: 125.0,
+            // width: 125.0,
+          ),
+        )
+            :
         Stack(
           children: [
 
@@ -443,7 +426,16 @@ class _AddMapScreenState extends State<AddMapScreen> {
 
             GoogleMap(
               onTap: _handleTap,
-              initialCameraPosition: _kGoogle,
+              initialCameraPosition:CameraPosition(
+                  target: LatLng(position!.latitude, position!.longitude),
+                  zoom: 15.6746
+              ),
+              // initialCameraPosition: CameraPosition(
+              //     target: LatLng(_currentPosition!.latitude,_currentPosition!.longitude),
+              //     zoom: 15.6746
+              // ),
+             // initialCameraPosition: _kGoogle,
+              //initialCameraPosition: LatLng(_currentPosition.latitude,_currentPosition.longitude),
               mapType:_selectedMapIndex ==  0 ?  MapType.normal: MapType.satellite,
               markers: _markers,
               myLocationEnabled: true,
@@ -475,7 +467,7 @@ class _AddMapScreenState extends State<AddMapScreen> {
               zoomControlsEnabled: true,
               initialCameraPosition:CameraPosition(
                 target: LatLng(position!.latitude, position!.longitude),
-                zoom: 13.0,
+                  zoom: 15.6746
               ),
               onMapCreated: (GoogleMapController controller){
                 _controller = controller;
@@ -485,7 +477,6 @@ class _AddMapScreenState extends State<AddMapScreen> {
               ,
               markers: _marker,
               polylines: _polyline,
-
 
               // polygons: {
               //   Polygon(
@@ -716,42 +707,69 @@ class _AddMapScreenState extends State<AddMapScreen> {
 
             Positioned(
               bottom: 20,
-              left: 280,
-              right: 280,
-              child: InkWell(
-                onTap: (){
-                  NavigationService().navigatePage(AddLandProfile(),replace: true);
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  alignment: Alignment.center,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: ThemeConfig.primary
+              left: 0,
+              right: 0,
+              child:  Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      NavigationService().pop();
+                      //Navigator.of(ctx).pop();
+                    },
+                    child:  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 24),
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: ThemeConfig.primary),
+                        color: Colors.white
+                        //color: ThemeConfig.primary
+                      ),
+                      child: Text("Continue",style:ThemeConfig.primary14,),
+                    ),
                   ),
-                  child:Text("Submit",style: ThemeConfig.textStylewhite16,),
-                ),
+                   SizedBox(width: 40,),
+                  TextButton(
+                    onPressed: () {
+                      // Navigator.of(ctx).pop();
+                      NavigationService().navigatePage(AddLandProfile(),replace: true);
+
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 24),
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: ThemeConfig.primary
+                      ),
+                      child: Text("Finish",style: ThemeConfig.textStylewhite16,),
+                    ),
+                  ),
+                ],
               ),
+              // child: InkWell(
+              //   onTap: (){
+              //     NavigationService().navigatePage(AddLandProfile(),replace: true);
+              //   },
+              //   child: Container(
+              //     padding: EdgeInsets.symmetric(horizontal: 40),
+              //     alignment: Alignment.center,
+              //     height: 40,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(6),
+              //         color: ThemeConfig.primary
+              //     ),
+              //     child:Text("Submit",style: ThemeConfig.textStylewhite16,),
+              //   ),
+              // ),
             ),
 
-            // Positioned(
-            //   bottom: 30,
-            //   left: 0,
-            //   right: 30,
-            //   child: InkWell(
-            //     onTap: (){
-            //       if(getgpsEnsble)
-            //       {
-            //         getgpsEnsble = false;
-            //       }
-            //       else{
-            //         getgpsEnsble = true;
-            //         checkGps();
-            //       }
-            //     },
-            //       child: Text("button")),
-            // ),
+
 
           ],
         ),
@@ -772,10 +790,15 @@ class _AddMapScreenState extends State<AddMapScreen> {
           title: 'I am a marker',
         ),
 
+
+
+
        //icon:await getBitmapDescriptorFromAssetBytes("assets/images/marker.png", 35)
-       // icon:pinLocationIcon,
+        //icon:pinLocationIcon,
        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ));
+
+
 
       latLan.add(LatLng(point.latitude, point.longitude));
 

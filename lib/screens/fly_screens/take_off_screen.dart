@@ -204,8 +204,12 @@ LatLng(24.879999, 74.629997),
                   Polygon(
                       polygonId: PolygonId("1"),
                       points: polygonsPoints,
-                      fillColor: Color(0xFF006491).withOpacity(0.2),
-                      strokeWidth: 2
+                      // fillColor: Color(0xFF006491).withOpacity(0.2),
+                      // strokeWidth: 2
+                      fillColor: Colors.redAccent.withOpacity(0.1),
+                      // fillColor: Color(0xFF006491).withOpacity(0.2),
+                      strokeWidth: 2,
+                      strokeColor: Colors.red
                   ),
                 }
             ),

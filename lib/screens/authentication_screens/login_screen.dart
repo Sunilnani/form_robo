@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                                   return null;
                                 },
                                 controller: _usernameController,
-                                title: "Enter User Namer",
+                                title: "Enter User Name",
                                 //suffixIcon: Icons.person
                             ),
                             AppTextFormField(

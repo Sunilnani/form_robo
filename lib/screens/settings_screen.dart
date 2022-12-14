@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_robo/components/theme_config.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
+
 import 'package:perfect_volume_control/perfect_volume_control.dart';
 import 'package:flutter_screen_wake/flutter_screen_wake.dart';
 

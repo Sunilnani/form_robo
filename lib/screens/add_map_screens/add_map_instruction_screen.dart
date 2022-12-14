@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_robo/components/navigation_service.dart';
 import 'package:form_robo/components/theme_config.dart';
 import 'package:form_robo/screens/add_map_screens/add_map_screen.dart';
+import 'package:form_robo/screens/add_map_screens/start_map.dart';
 import 'package:form_robo/screens/widgets/instructions_card.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -369,7 +370,7 @@ class _MapInstructionScreenState extends State<MapInstructionScreen> {
 
             InkWell(
               onTap: (){
-                NavigationService().navigatePage(AddMapScreen(selectedMap: widget.isSelectedmap,));
+                NavigationService().navigatePage(StartMap(selectedMap: widget.isSelectedmap,));
               },
               child: Container(
                 alignment: Alignment.center,
